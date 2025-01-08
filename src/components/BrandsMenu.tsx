@@ -45,6 +45,7 @@ export function BrandsMenu() {
   const [isCollapsed, setIsCollapsed] = React.useState(false);
   const [isSticky, setIsSticky] = React.useState(false);
   const [lastScrollY, setLastScrollY] = React.useState(0);
+  const [manualExpand, setManualExpand] = React.useState(false);
 
   React.useEffect(() => {
     const handleScroll = () => {
@@ -58,14 +59,14 @@ export function BrandsMenu() {
 
       if (menuBottom < 0) {
         setIsSticky(true);
-        if (!isCollapsed) {
+        if (!isCollapsed && !manualExpand) {
           setIsCollapsed(true);
         }
       } else {
         setIsSticky(false);
       }
 
-      if (isScrollingUp && menuTop > -100 && isCollapsed) {
+      if (isScrollingUp && menuTop > -100 && isCollapsed && !manualExpand) {
         setIsCollapsed(false);
       }
 
@@ -74,7 +75,13 @@ export function BrandsMenu() {
 
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
-  }, [isCollapsed, lastScrollY]);
+  }, [isCollapsed, lastScrollY, manualExpand]);
+
+  const handleToggleCollapse = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    setIsCollapsed(!isCollapsed);
+    setManualExpand(!isCollapsed);
+  };
 
   return (
     <div className="relative mb-24" ref={menuRef}>
@@ -92,15 +99,17 @@ export function BrandsMenu() {
           isSticky && "fixed top-0 left-0 right-0",
           isCollapsed && "cursor-pointer"
         )}
-        onClick={() => isCollapsed && setIsCollapsed(false)}
+        onClick={() => {
+          if (isCollapsed) {
+            setIsCollapsed(false);
+            setManualExpand(true);
+          }
+        }}
       >
         <div className="absolute inset-0 bg-gradient-to-r from-gold/5 via-transparent to-gold/5 opacity-50" />
         
         <motion.button
-          onClick={(e) => {
-            e.stopPropagation();
-            setIsCollapsed(!isCollapsed);
-          }}
+          onClick={handleToggleCollapse}
           className={cn(
             "absolute right-4 top-4 bg-secondary/80 hover:bg-secondary text-foreground p-2 rounded-lg shadow-lg backdrop-blur-sm border border-gold/20 transition-all duration-300",
           )}
