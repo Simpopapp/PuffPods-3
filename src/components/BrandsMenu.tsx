@@ -53,8 +53,8 @@ export function BrandsMenu() {
       <motion.div
         ref={ref}
         animate={{
-          height: isCollapsed ? "64px" : (inView ? "auto" : "50%"),
-          minHeight: isCollapsed ? "64px" : (inView ? "300px" : "150px"),
+          height: isCollapsed ? "96px" : (inView ? "auto" : "50%"),
+          minHeight: isCollapsed ? "96px" : (inView ? "300px" : "150px"),
           opacity: 1,
         }}
         transition={{ duration: 0.5, ease: "easeInOut" }}
@@ -83,6 +83,16 @@ export function BrandsMenu() {
             <ChevronUp className="w-6 h-6 text-gold" />
           )}
         </motion.button>
+
+        {isCollapsed && (
+          <motion.div
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
+          >
+            <h2 className="text-xl font-semibold text-gold">Nossas Marcas</h2>
+          </motion.div>
+        )}
 
         <motion.div 
           className="container mx-auto px-4"
