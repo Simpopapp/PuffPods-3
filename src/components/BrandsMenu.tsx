@@ -91,13 +91,18 @@ export function BrandsMenu() {
         className={cn(
           "relative w-full bg-gradient-to-b from-secondary/80 to-secondary/40 backdrop-blur-md z-40 shadow-lg overflow-hidden",
           !isCollapsed && "py-12",
-          isSticky && "fixed top-0 left-0 right-0"
+          isSticky && "fixed top-0 left-0 right-0",
+          isCollapsed && "cursor-pointer"
         )}
+        onClick={() => isCollapsed && setIsCollapsed(false)}
       >
         <div className="absolute inset-0 bg-gradient-to-r from-gold/5 via-transparent to-gold/5 opacity-50" />
         
         <motion.button
-          onClick={() => setIsCollapsed(!isCollapsed)}
+          onClick={(e) => {
+            e.stopPropagation();
+            setIsCollapsed(!isCollapsed);
+          }}
           className={cn(
             "absolute right-4 top-4 bg-secondary/80 hover:bg-secondary text-foreground p-2 rounded-lg shadow-lg backdrop-blur-sm border border-gold/20 transition-all duration-300",
           )}
