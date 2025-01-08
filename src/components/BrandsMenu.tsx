@@ -47,11 +47,13 @@ export function BrandsMenu() {
     triggerOnce: false,
   });
   const [isCollapsed, setIsCollapsed] = React.useState(false);
+  const [hasScrolledPast, setHasScrolledPast] = React.useState(false);
 
-  // Effect to automatically collapse menu when scrolling past it
+  // Effect to handle menu state based on scroll position
   React.useEffect(() => {
     if (!inView && !isCollapsed) {
       setIsCollapsed(true);
+      setHasScrolledPast(true);
     }
   }, [inView, isCollapsed]);
 
@@ -61,15 +63,15 @@ export function BrandsMenu() {
         ref={ref}
         initial={{ opacity: 0 }}
         animate={{
-          height: isCollapsed ? "96px" : (inView ? "auto" : "50%"),
-          minHeight: isCollapsed ? "96px" : (inView ? "300px" : "150px"),
+          height: isCollapsed ? "96px" : "auto",
+          minHeight: isCollapsed ? "96px" : "300px",
           opacity: 1,
         }}
         transition={{ duration: 0.5, ease: "easeInOut" }}
         className={cn(
           "relative w-full bg-gradient-to-b from-secondary/80 to-secondary/40 backdrop-blur-md z-40 shadow-lg overflow-hidden",
           !isCollapsed && "py-12",
-          isCollapsed && !inView && "fixed top-0 left-0 right-0"
+          hasScrolledPast && !inView && "fixed top-0 left-0 right-0"
         )}
       >
         <div className="absolute inset-0 bg-gradient-to-r from-gold/5 via-transparent to-gold/5 opacity-50" />
