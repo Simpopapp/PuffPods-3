@@ -83,8 +83,14 @@ export function BrandsMenu() {
     setManualExpand(true);
   };
 
-  const handleContainerClick = () => {
-    if (isSticky) {
+  const handleHeaderClick = (e: React.MouseEvent) => {
+    // Get the click position relative to the target element
+    const target = e.currentTarget as HTMLDivElement;
+    const rect = target.getBoundingClientRect();
+    const clickY = e.clientY - rect.top;
+
+    // Only toggle if click is within the collapsed menu height (96px)
+    if (clickY <= 96 && isSticky) {
       setIsCollapsed(!isCollapsed);
       setManualExpand(true);
     }
@@ -106,7 +112,7 @@ export function BrandsMenu() {
           isSticky && "fixed top-0 left-0 right-0",
           isCollapsed && "cursor-pointer"
         )}
-        onClick={handleContainerClick}
+        onClick={handleHeaderClick}
       >
         <div className="absolute inset-0 bg-gradient-to-r from-gold/5 via-transparent to-gold/5 opacity-50" />
         
