@@ -49,7 +49,7 @@ export function BrandsMenu() {
   const [isCollapsed, setIsCollapsed] = React.useState(false);
 
   return (
-    <div className="relative">
+    <div className="relative mb-24">
       <motion.div
         ref={ref}
         animate={{
