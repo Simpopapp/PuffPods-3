@@ -23,19 +23,19 @@ const brandMenuItems: BrandMenuItem[] = [
   {
     id: "elfbar",
     name: "Elf Bar",
-    image: "https://elfbarbrasil.com/elfbar/bc10000-black-gold/",
+    image: "/placeholder.svg",
     route: "/elfbar"
   },
   {
     id: "lostmary",
     name: "Lost Mary",
-    image: "https://mipod.com/cdn/shop/files/lostmary-mo20000_sampler-image_600x600.png?v=1716393277",
+    image: "/placeholder.svg",
     route: "/lostmary"
   },
   {
     id: "oxbar",
     name: "Ox Bar",
-    image: "https://www.oxbar.com/cdn/shop/files/20240715-172125.png?v=1721035393",
+    image: "/placeholder.svg",
     route: "/oxbar"
   }
 ];
@@ -59,6 +59,7 @@ export function BrandsMenu() {
     <div className="relative mb-24">
       <motion.div
         ref={ref}
+        initial={{ opacity: 0 }}
         animate={{
           height: isCollapsed ? "96px" : (inView ? "auto" : "50%"),
           minHeight: isCollapsed ? "96px" : (inView ? "300px" : "150px"),
