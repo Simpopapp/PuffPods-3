@@ -2,7 +2,6 @@ import * as React from "react";
 import { useNavigate } from "react-router-dom";
 import { cn } from "@/lib/utils";
 import { motion, AnimatePresence } from "framer-motion";
-import { useInView } from "react-intersection-observer";
 import { ChevronUp, ChevronDown } from "lucide-react";
 import {
   Carousel,
@@ -42,25 +41,36 @@ const brandMenuItems: BrandMenuItem[] = [
 
 export function BrandsMenu() {
   const navigate = useNavigate();
-  const [ref, inView] = useInView({
-    threshold: 0.5,
-    triggerOnce: false,
-  });
+  const menuRef = React.useRef<HTMLDivElement>(null);
   const [isCollapsed, setIsCollapsed] = React.useState(false);
-  const [hasScrolledPast, setHasScrolledPast] = React.useState(false);
+  const [isSticky, setIsSticky] = React.useState(false);
 
-  // Effect to handle menu state based on scroll position
   React.useEffect(() => {
-    if (!inView && !isCollapsed) {
-      setIsCollapsed(true);
-      setHasScrolledPast(true);
-    }
-  }, [inView, isCollapsed]);
+    const handleScroll = () => {
+      if (!menuRef.current) return;
+
+      const menuPosition = menuRef.current.getBoundingClientRect();
+      const menuBottom = menuPosition.bottom;
+      const windowHeight = window.innerHeight;
+
+      // Se o menu estiver saindo da viewport
+      if (menuBottom < 0) {
+        setIsSticky(true);
+        if (!isCollapsed) {
+          setIsCollapsed(true);
+        }
+      } else {
+        setIsSticky(false);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [isCollapsed]);
 
   return (
-    <div className="relative mb-24">
+    <div className="relative mb-24" ref={menuRef}>
       <motion.div
-        ref={ref}
         initial={{ opacity: 0 }}
         animate={{
           height: isCollapsed ? "96px" : "auto",
@@ -71,7 +81,7 @@ export function BrandsMenu() {
         className={cn(
           "relative w-full bg-gradient-to-b from-secondary/80 to-secondary/40 backdrop-blur-md z-40 shadow-lg overflow-hidden",
           !isCollapsed && "py-12",
-          hasScrolledPast && !inView && "fixed top-0 left-0 right-0"
+          isSticky && "fixed top-0 left-0 right-0"
         )}
       >
         <div className="absolute inset-0 bg-gradient-to-r from-gold/5 via-transparent to-gold/5 opacity-50" />
@@ -107,8 +117,8 @@ export function BrandsMenu() {
         <motion.div 
           className="container mx-auto px-4"
           animate={{
-            scale: inView ? 1 : 0.8,
-            opacity: inView ? 1 : 0.8,
+            scale: !isCollapsed ? 1 : 0.8,
+            opacity: !isCollapsed ? 1 : 0.8,
           }}
           transition={{ duration: 0.5, ease: "easeInOut" }}
         >
