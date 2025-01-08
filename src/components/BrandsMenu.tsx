@@ -56,7 +56,6 @@ export function BrandsMenu() {
       const currentScrollY = window.scrollY;
       const isScrollingUp = currentScrollY < lastScrollY;
 
-      // Se o menu estiver saindo da viewport
       if (menuBottom < 0) {
         setIsSticky(true);
         if (!isCollapsed) {
@@ -66,7 +65,6 @@ export function BrandsMenu() {
         setIsSticky(false);
       }
 
-      // Se estiver rolando para cima e o menu estiver próximo da sua posição original
       if (isScrollingUp && menuTop > -100 && isCollapsed) {
         setIsCollapsed(false);
       }
@@ -106,9 +104,11 @@ export function BrandsMenu() {
           className={cn(
             "absolute right-4 top-4 bg-secondary/80 hover:bg-secondary text-foreground p-2 rounded-lg shadow-lg backdrop-blur-sm border border-gold/20 transition-all duration-300",
           )}
+          initial={false}
           animate={{
             rotate: isCollapsed ? 180 : 0,
           }}
+          transition={{ duration: 0.3 }}
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
         >
