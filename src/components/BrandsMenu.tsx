@@ -114,18 +114,21 @@ export function BrandsMenu() {
           )}
         </motion.button>
 
-        {isCollapsed && (
-          <motion.div
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
+        <div className="absolute left-1/2 top-8 -translate-x-1/2 w-full text-center">
+          <motion.h2 
+            className="text-4xl font-bold tracking-tight bg-gradient-gold text-gradient"
+            animate={{
+              scale: isCollapsed ? 0.8 : 1,
+              y: isCollapsed ? -10 : 0
+            }}
+            transition={{ duration: 0.3 }}
           >
-            <h2 className="text-xl font-semibold text-gold">Nossas Marcas</h2>
-          </motion.div>
-        )}
+            Nossas Marcas
+          </motion.h2>
+        </div>
 
         <motion.div 
-          className="container mx-auto px-4"
+          className="container mx-auto px-4 mt-20"
           animate={{
             scale: !isCollapsed ? 1 : 0.8,
             opacity: !isCollapsed ? 1 : 0.8,
