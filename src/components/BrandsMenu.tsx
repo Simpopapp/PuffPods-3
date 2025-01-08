@@ -59,8 +59,9 @@ export function BrandsMenu() {
         }}
         transition={{ duration: 0.5, ease: "easeInOut" }}
         className={cn(
-          "relative w-full bg-gradient-to-b from-secondary/80 to-secondary/40 backdrop-blur-md z-40 py-12 shadow-lg overflow-hidden",
-          isCollapsed && "sticky top-0"
+          "relative w-full bg-gradient-to-b from-secondary/80 to-secondary/40 backdrop-blur-md z-40 shadow-lg overflow-hidden",
+          !isCollapsed && "py-12",
+          isCollapsed && !inView && "fixed top-0 left-0 right-0"
         )}
       >
         <div className="absolute inset-0 bg-gradient-to-r from-gold/5 via-transparent to-gold/5 opacity-50" />
