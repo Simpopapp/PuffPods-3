@@ -48,6 +48,13 @@ export function BrandsMenu() {
   });
   const [isCollapsed, setIsCollapsed] = React.useState(false);
 
+  // Effect to automatically collapse menu when scrolling past it
+  React.useEffect(() => {
+    if (!inView && !isCollapsed) {
+      setIsCollapsed(true);
+    }
+  }, [inView, isCollapsed]);
+
   return (
     <div className="relative mb-24">
       <motion.div
