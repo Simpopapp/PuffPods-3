@@ -80,7 +80,14 @@ export function BrandsMenu() {
   const handleToggleCollapse = (e: React.MouseEvent) => {
     e.stopPropagation();
     setIsCollapsed(!isCollapsed);
-    setManualExpand(!isCollapsed);
+    setManualExpand(true);
+  };
+
+  const handleContainerClick = () => {
+    if (isSticky) {
+      setIsCollapsed(!isCollapsed);
+      setManualExpand(true);
+    }
   };
 
   return (
@@ -99,12 +106,7 @@ export function BrandsMenu() {
           isSticky && "fixed top-0 left-0 right-0",
           isCollapsed && "cursor-pointer"
         )}
-        onClick={() => {
-          if (isCollapsed) {
-            setIsCollapsed(false);
-            setManualExpand(true);
-          }
-        }}
+        onClick={handleContainerClick}
       >
         <div className="absolute inset-0 bg-gradient-to-r from-gold/5 via-transparent to-gold/5 opacity-50" />
         
