@@ -44,14 +44,17 @@ export function BrandsMenu() {
   const menuRef = React.useRef<HTMLDivElement>(null);
   const [isCollapsed, setIsCollapsed] = React.useState(false);
   const [isSticky, setIsSticky] = React.useState(false);
+  const [lastScrollY, setLastScrollY] = React.useState(0);
 
   React.useEffect(() => {
     const handleScroll = () => {
       if (!menuRef.current) return;
 
       const menuPosition = menuRef.current.getBoundingClientRect();
+      const menuTop = menuPosition.top;
       const menuBottom = menuPosition.bottom;
-      const windowHeight = window.innerHeight;
+      const currentScrollY = window.scrollY;
+      const isScrollingUp = currentScrollY < lastScrollY;
 
       // Se o menu estiver saindo da viewport
       if (menuBottom < 0) {
@@ -62,11 +65,18 @@ export function BrandsMenu() {
       } else {
         setIsSticky(false);
       }
+
+      // Se estiver rolando para cima e o menu estiver próximo da sua posição original
+      if (isScrollingUp && menuTop > -100 && isCollapsed) {
+        setIsCollapsed(false);
+      }
+
+      setLastScrollY(currentScrollY);
     };
 
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
-  }, [isCollapsed]);
+  }, [isCollapsed, lastScrollY]);
 
   return (
     <div className="relative mb-24" ref={menuRef}>
