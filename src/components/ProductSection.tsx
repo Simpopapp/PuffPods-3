@@ -32,26 +32,24 @@ export const ProductSection = ({ title, children, className }: ProductSectionPro
         <ChevronDown className="text-gold h-6 w-6" />
       </div>
       
-      <div className="relative">
-        <div className={cn(
-          "flex flex-nowrap gap-8 overflow-x-auto pb-4 custom-scrollbar",
-          !isExpanded && "max-w-full"
-        )}>
-          {children}
-          
-          {!isExpanded && (
-            <div className="sticky right-0 flex items-center pl-4 bg-gradient-to-l from-background via-background to-transparent">
-              <Button
-                variant="outline"
-                className="bg-secondary hover:bg-secondary/80 whitespace-nowrap"
-                onClick={() => setIsExpanded(true)}
-              >
-                <ChevronDown className="mr-2 h-4 w-4" />
-                Ver mais produtos
-              </Button>
-            </div>
-          )}
-        </div>
+      <div className={cn(
+        "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8",
+        !isExpanded && "max-h-[800px] overflow-hidden relative"
+      )}>
+        {children}
+        
+        {!isExpanded && (
+          <div className="absolute bottom-0 left-0 right-0 h-40 bg-gradient-to-t from-background to-transparent flex items-end justify-center pb-4">
+            <Button
+              variant="outline"
+              className="bg-secondary hover:bg-secondary/80"
+              onClick={() => setIsExpanded(true)}
+            >
+              <ChevronDown className="mr-2 h-4 w-4" />
+              Ver mais produtos
+            </Button>
+          </div>
+        )}
       </div>
     </section>
   );
