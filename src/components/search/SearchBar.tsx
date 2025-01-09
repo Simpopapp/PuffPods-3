@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Search, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ScrollArea } from "@/components/ui/scroll-area";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 interface SearchBarProps {
   onSearch: (term: string) => void;
@@ -13,6 +14,7 @@ export function SearchBar({ onSearch }: SearchBarProps) {
   const [searchTerm, setSearchTerm] = useState("");
   const [recentSearches, setRecentSearches] = useState<string[]>([]);
   const [showRecent, setShowRecent] = useState(false);
+  const isMobile = useIsMobile();
 
   useEffect(() => {
     const saved = localStorage.getItem("recentSearches");
@@ -54,7 +56,7 @@ export function SearchBar({ onSearch }: SearchBarProps) {
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
             onFocus={() => setShowRecent(true)}
-            className="pr-10 h-12 text-lg bg-secondary/80 border-0 focus:ring-2 ring-gold/50"
+            className={`${isMobile ? "h-10 text-base" : "h-12 text-lg"} pr-10 bg-secondary/80 border-0 focus:ring-2 ring-gold/50`}
           />
           {searchTerm && (
             <Button
@@ -69,10 +71,10 @@ export function SearchBar({ onSearch }: SearchBarProps) {
         </div>
         <Button 
           onClick={handleSearch}
-          className="h-12 px-6 bg-gradient-gold text-black hover:bg-gold/90"
+          className={`${isMobile ? "h-10 px-4" : "h-12 px-6"} bg-gradient-gold text-black hover:bg-gold/90`}
         >
-          <Search className="h-5 w-5 mr-2" />
-          Buscar
+          <Search className={`${isMobile ? "h-4 w-4" : "h-5 w-5"} ${!isMobile && "mr-2"}`} />
+          {!isMobile && "Buscar"}
         </Button>
       </div>
 

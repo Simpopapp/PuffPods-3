@@ -1,5 +1,6 @@
 import { ProductCard } from "@/components/ProductCard";
 import { motion, AnimatePresence } from "framer-motion";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 interface Product {
   id: string;
@@ -18,14 +19,16 @@ interface ProductGridProps {
 }
 
 export function ProductGrid({ products, selectedCategory, view }: ProductGridProps) {
+  const isMobile = useIsMobile();
+  
   const gridClass = view === "grid" 
-    ? "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+    ? `grid ${isMobile ? "grid-cols-2" : "grid-cols-1 md:grid-cols-2 lg:grid-cols-3"} gap-3 md:gap-6`
     : "flex flex-col gap-4";
 
   return (
     <AnimatePresence mode="wait">
       <motion.div 
-        className={`p-4 ${gridClass}`}
+        className={`p-2 md:p-4 ${gridClass}`}
         layout
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
@@ -48,6 +51,7 @@ export function ProductGrid({ products, selectedCategory, view }: ProductGridPro
               <ProductCard 
                 {...product}
                 time={`${product.puffCount} puffs`}
+                className={view === "list" ? "flex-row" : ""}
               />
             </motion.div>
           ))
