@@ -33,7 +33,15 @@ export const CartFooter = ({ total }: CartFooterProps) => {
       </div>
 
       <Button 
-        className="w-full bg-gradient-gold text-black hover:bg-gold hover:scale-[1.02] transition-all duration-300 font-bold text-lg"
+        className="w-full font-bold text-lg relative overflow-hidden"
+        style={{
+          background: "linear-gradient(135deg, #FFB800 0%, #FFD700 50%, #FFB800 100%)",
+          backgroundSize: "200% auto",
+          animation: "shimmer 2s linear infinite",
+          color: "#0D0D0F",
+          textShadow: "0 0 15px rgba(255, 184, 0, 0.2)",
+          letterSpacing: "0.05em",
+        }}
         onClick={() => {
           toast.success("Preparando seu pedido premium! 🌟");
           console.log('Iniciando checkout...');
