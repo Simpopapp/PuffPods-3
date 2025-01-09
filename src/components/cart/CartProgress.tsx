@@ -20,14 +20,10 @@ export const CartProgress = ({ total }: CartProgressProps) => {
     return Math.min(75 + additionalProgress, 100);
   };
 
-  // Determine which bar to show
-  const showFirstBar = total < firstThreshold;
-  const showSecondBar = total >= firstThreshold;
-
   return (
     <div className="space-y-2">
       <AnimatePresence mode="wait">
-        {showFirstBar && (
+        {total < firstThreshold ? (
           <motion.div
             key="first-progress"
             initial={{ opacity: 0 }}
@@ -53,9 +49,7 @@ export const CartProgress = ({ total }: CartProgressProps) => {
               Faltam R$ {(firstThreshold - total).toFixed(2)} para Frete Grátis
             </div>
           </motion.div>
-        )}
-
-        {showSecondBar && (
+        ) : (
           <motion.div
             key="second-progress"
             initial={{ opacity: 0 }}
@@ -87,7 +81,7 @@ export const CartProgress = ({ total }: CartProgressProps) => {
       </AnimatePresence>
 
       <AnimatePresence>
-        {showSecondBar && (
+        {total >= firstThreshold && (
           <motion.div
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
