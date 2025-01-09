@@ -44,23 +44,26 @@ export function BrandsMenu() {
       const currentScrollY = window.scrollY;
       const isScrollingUp = currentScrollY < lastScrollY;
 
-      if (menuBottom < 0) {
-        setIsSticky(true);
-        if (!isCollapsed && !manualExpand) {
-          setIsCollapsed(true);
+      // Use requestAnimationFrame for smooth animations
+      requestAnimationFrame(() => {
+        if (menuBottom < 0) {
+          setIsSticky(true);
+          if (!isCollapsed && !manualExpand) {
+            setIsCollapsed(true);
+          }
+        } else {
+          setIsSticky(false);
         }
-      } else {
-        setIsSticky(false);
-      }
 
-      if (isScrollingUp && menuTop > -100 && isCollapsed && !manualExpand) {
-        setIsCollapsed(false);
-      }
+        if (isScrollingUp && menuTop > -100 && isCollapsed && !manualExpand) {
+          setIsCollapsed(false);
+        }
+      });
 
       setLastScrollY(currentScrollY);
     };
 
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, [isCollapsed, lastScrollY, manualExpand]);
 
@@ -90,7 +93,12 @@ export function BrandsMenu() {
           minHeight: isCollapsed ? (isMobile ? "72px" : "96px") : (isMobile ? "250px" : "300px"),
           opacity: 1,
         }}
-        transition={{ duration: 0.5, ease: "easeInOut" }}
+        transition={{ 
+          duration: 0.5, 
+          ease: [0.4, 0, 0.2, 1],
+          layout: { duration: 0.3 }
+        }}
+        layout
         className={cn(
           "relative w-full bg-gradient-to-b from-secondary/80 to-secondary/40 backdrop-blur-md z-40 shadow-lg overflow-hidden",
           !isCollapsed && "py-8 sm:py-12",
@@ -99,7 +107,14 @@ export function BrandsMenu() {
         )}
         onClick={handleHeaderClick}
       >
-        <div className="absolute inset-0 bg-gradient-to-r from-gold/5 via-transparent to-gold/5 opacity-50" />
+        <motion.div 
+          className="absolute inset-0 bg-gradient-to-r from-gold/5 via-transparent to-gold/5 opacity-50"
+          animate={{
+            opacity: isCollapsed ? 0.3 : 0.5,
+            scale: isCollapsed ? 0.98 : 1
+          }}
+          transition={{ duration: 0.3 }}
+        />
         
         <BrandsMenuHeader 
           isCollapsed={isCollapsed}
@@ -107,7 +122,7 @@ export function BrandsMenu() {
           isMobile={isMobile}
         />
 
-        <AnimatePresence>
+        <AnimatePresence mode="wait">
           <BrandsCarousel 
             isCollapsed={isCollapsed}
             brandMenuItems={brandMenuItems}

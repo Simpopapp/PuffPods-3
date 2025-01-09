@@ -19,12 +19,13 @@ export const CartProgress = ({ total }: CartProgressProps) => {
   };
 
   const justUnlockedFreeShipping = total >= firstThreshold && total < firstThreshold + 0.01;
+  const justUnlockedVIP = total >= secondThreshold && total < secondThreshold + 0.01;
 
   return (
     <motion.div 
-      className="space-y-2"
-      animate={justUnlockedFreeShipping ? {
-        background: [
+      className="space-y-2 p-4"
+      animate={justUnlockedFreeShipping || justUnlockedVIP ? {
+        backgroundColor: [
           "rgba(255, 184, 0, 0)",
           "rgba(255, 184, 0, 0.2)",
           "rgba(255, 184, 0, 0)"
@@ -33,14 +34,16 @@ export const CartProgress = ({ total }: CartProgressProps) => {
       transition={{
         duration: 1.5,
         ease: "easeInOut",
+        repeat: justUnlockedFreeShipping || justUnlockedVIP ? 2 : 0,
       }}
     >
       <AnimatePresence mode="wait">
         {total < firstThreshold && (
           <motion.div
-            initial={{ opacity: 1 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: "auto" }}
+            exit={{ opacity: 0, height: 0 }}
+            transition={{ duration: 0.3 }}
             key="first-bar"
           >
             <ProgressBar
@@ -54,9 +57,10 @@ export const CartProgress = ({ total }: CartProgressProps) => {
 
         {total >= firstThreshold && (
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0 }}
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: "auto" }}
+            exit={{ opacity: 0, height: 0 }}
+            transition={{ duration: 0.3 }}
             key="second-bar"
           >
             <ProgressBar

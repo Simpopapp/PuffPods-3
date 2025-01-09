@@ -3,11 +3,12 @@ import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useCart } from "@/contexts/CartContext";
 import { toast } from "sonner";
-import { motion } from "framer-motion";
+import { motion, useAnimation } from "framer-motion";
 import { useInView } from "react-intersection-observer";
-import { ShoppingCart } from "lucide-react";
+import { ShoppingCart, Sparkles } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useIsMobile } from "@/hooks/use-mobile";
+import { useState } from "react";
 
 interface ProductCardProps {
   id: string;
@@ -35,19 +36,41 @@ export function ProductCard({
   const { addItem } = useCart();
   const navigate = useNavigate();
   const isMobile = useIsMobile();
+  const controls = useAnimation();
+  const [isHovered, setIsHovered] = useState(false);
   const [ref, inView] = useInView({
     triggerOnce: true,
     threshold: 0.1
   });
 
-  const handleBuy = (e: React.MouseEvent) => {
-    e.stopPropagation();
-    addItem({ id, name, price, image });
-    if (!isCartOpen) {
-      toast.success("Produto adicionado ao carrinho!", {
-        description: "Clique no carrinho para ver seus itens"
+  React.useEffect(() => {
+    if (inView) {
+      controls.start({
+        opacity: 1,
+        y: 0,
+        transition: { duration: 0.5, ease: "easeOut" }
       });
     }
+  }, [controls, inView]);
+
+  const handleBuy = async (e: React.MouseEvent) => {
+    e.stopPropagation();
+    
+    // Animate the button
+    await controls.start({
+      scale: [1, 0.95, 1],
+      transition: { duration: 0.2 }
+    });
+    
+    addItem({ id, name, price, image });
+    
+    if (!isCartOpen) {
+      toast.success("Produto adicionado ao carrinho!", {
+        description: "Clique no carrinho para ver seus itens",
+        icon: <Sparkles className="h-4 w-4 text-gold" />
+      });
+    }
+    
     if (onClick) onClick();
   };
 
@@ -76,11 +99,12 @@ export function ProductCard({
     <motion.div
       ref={ref}
       initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5 }}
-      whileHover={{ scale: isMobile ? 1 : 1.02 }}
+      animate={controls}
+      whileHover={isMobile ? undefined : { scale: 1.02 }}
       className={`w-full ${className}`}
       onClick={handleClick}
+      onHoverStart={() => setIsHovered(true)}
+      onHoverEnd={() => setIsHovered(false)}
     >
       <Card className="bg-secondary border-0 overflow-hidden group relative cursor-pointer">
         <CardContent className="p-0">
@@ -91,16 +115,26 @@ export function ProductCard({
               className="w-full aspect-[4/3] object-cover"
               loading="lazy"
               layoutId={`product-image-${id}`}
+              animate={{
+                scale: isHovered ? 1.05 : 1
+              }}
+              transition={{ duration: 0.3 }}
             />
             <motion.div 
-              className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+              className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"
               initial={{ opacity: 0 }}
-              whileHover={{ opacity: 1 }}
+              animate={{ opacity: isHovered ? 1 : 0 }}
+              transition={{ duration: 0.3 }}
             />
             {!isMobile && (
               <motion.div
-                className="absolute top-3 right-3 z-10 bg-black/80 rounded-full p-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                whileHover={{ scale: 1.1 }}
+                className="absolute top-3 right-3 z-10 bg-black/80 rounded-full p-2"
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ 
+                  opacity: isHovered ? 1 : 0,
+                  scale: isHovered ? 1 : 0.8
+                }}
+                transition={{ duration: 0.2 }}
               >
                 <ShoppingCart className="h-4 w-4 text-gold" />
               </motion.div>
@@ -115,17 +149,31 @@ export function ProductCard({
             transition={{ delay: 0.2 }}
             className="space-y-2"
           >
-            <h3 className="text-base font-semibold text-gold group-hover:text-white transition-colors duration-300 line-clamp-1">
+            <motion.h3 
+              className="text-base font-semibold text-gold group-hover:text-white transition-colors duration-300 line-clamp-1"
+              animate={{
+                y: isHovered ? -2 : 0
+              }}
+            >
               {name}
-            </h3>
+            </motion.h3>
             {time && (
-              <p className="text-xs text-gray-400 group-hover:text-gray-300 transition-colors duration-300">
+              <motion.p 
+                className="text-xs text-gray-400 group-hover:text-gray-300 transition-colors duration-300"
+                animate={{
+                  y: isHovered ? -1 : 0
+                }}
+              >
                 {time}
-              </p>
+              </motion.p>
             )}
             <motion.p 
-              className="text-lg font-bold text-gold group-hover:scale-110 origin-left transition-transform duration-300"
-              whileHover={{ scale: 1.1 }}
+              className="text-lg font-bold text-gold"
+              animate={{
+                scale: isHovered ? 1.1 : 1,
+                y: isHovered ? -2 : 0
+              }}
+              transition={{ duration: 0.2 }}
             >
               R$ {price.toFixed(2)}
             </motion.p>
