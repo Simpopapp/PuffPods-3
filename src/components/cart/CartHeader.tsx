@@ -20,9 +20,14 @@ export const CartHeader = () => {
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: -20 }}
               transition={{ duration: 0.5, ease: "easeOut" }}
-              className="text-gradient bg-gradient-gold ml-4 text-xl font-medium tracking-wider italic relative"
+              className="text-gradient bg-gradient-gold ml-6 text-xl font-semibold tracking-[0.15em] italic relative"
               style={{
-                textShadow: "0 0 10px rgba(255, 184, 0, 0.3)",
+                textShadow: "0 0 15px rgba(255, 184, 0, 0.4)",
+                background: "linear-gradient(135deg, #FFB800 0%, #FFD700 50%, #FFB800 100%)",
+                WebkitBackgroundClip: "text",
+                backgroundClip: "text",
+                color: "transparent",
+                animation: "shimmer 2s linear infinite",
               }}
             >
               Premium
