@@ -2,55 +2,55 @@
 
 ## Plano de Implementação Mobile-First
 
-### Etapa 1: Estrutura Base e Navegação
-- Implementar bottom navigation bar fixa
-- Reorganizar header para formato mobile
-- Criar sistema de tabs deslizantes
-- Implementar gestos básicos de navegação
-- Otimizar BrandsMenu para formato mobile
-- Ajustar posicionamento do carrinho
+### Etapa 1: Navegação e Estrutura Base
+- Implementar bottom navigation bar fixa com ícones intuitivos
+- Criar páginas principais: Home, Categorias, Busca e Perfil
+- Desenvolver sistema de navegação por gestos
+- Implementar transições suaves entre páginas
+- Criar header minimalista e adaptativo
+- Adicionar menu lateral com filtros rápidos
 
-### Etapa 2: Layout de Produtos e Categorias
-- Redesenhar cards de produto para visualização vertical
-- Implementar lazy loading com skeleton
-- Criar navegação por chips de categoria
-- Otimizar imagens para carregamento mobile
-- Adicionar gestos de swipe nos cards
-- Implementar pull-to-refresh
+### Etapa 2: Home e Discovery
+- Criar carrossel horizontal de destaques
+- Implementar seções de "Mais Vendidos" e "Novidades"
+- Adicionar cards compactos com informações essenciais
+- Desenvolver sistema de recomendações personalizadas
+- Implementar pull-to-refresh com animações
+- Criar preview rápido de produtos
 
-### Etapa 3: Interatividade e Feedback
-- Adicionar animações de transição suaves
-- Implementar feedback tátil
-- Criar bottom sheets para detalhes
-- Otimizar formulários para touch
-- Adicionar indicadores de loading
-- Implementar infinite scroll
+### Etapa 3: Categorização e Busca
+- Desenvolver grid visual de categorias
+- Criar sistema de tags e filtros dinâmicos
+- Implementar busca com sugestões em tempo real
+- Adicionar histórico de buscas recentes
+- Criar visualização em lista/grid alternável
+- Implementar filtros avançados em bottom sheet
 
-### Etapa 4: Otimização de Performance
-- Implementar cache de imagens
-- Otimizar bundle size
-- Adicionar service worker
-- Melhorar tempo de carregamento inicial
-- Implementar prefetch de rotas
-- Otimizar assets
+### Etapa 4: Produto e Carrinho
+- Redesenhar página de produto com gestos
+- Criar preview de produtos relacionados
+- Implementar carrinho flutuante minimalista
+- Adicionar animações de adição ao carrinho
+- Desenvolver checkout simplificado
+- Criar resumo de pedido expansível
 
-### Etapa 5: Refinamento e Polimento
-- Melhorar acessibilidade
-- Refinar animações
-- Otimizar SEO mobile
-- Implementar analytics
-- Realizar testes de usabilidade
-- Ajustes finais de UI/UX
+### Etapa 5: Personalização e Social
+- Implementar sistema de favoritos
+- Criar perfil do usuário personalizado
+- Adicionar histórico de compras visual
+- Desenvolver sistema de recompensas
+- Implementar compartilhamento de produtos
+- Criar feed de novidades personalizado
 
 ## Como Implementar
 
 Para iniciar cada etapa do processo de implementação, basta enviar o comando correspondente:
 
-- "passo 1 agora" - Inicia implementação da Estrutura Base e Navegação
-- "passo 2 agora" - Inicia implementação do Layout de Produtos e Categorias
-- "passo 3 agora" - Inicia implementação da Interatividade e Feedback
-- "passo 4 agora" - Inicia implementação da Otimização de Performance
-- "passo 5 agora" - Inicia implementação do Refinamento e Polimento
+- "etapa 1 agora" - Inicia implementação da Navegação e Estrutura Base
+- "etapa 2 agora" - Inicia implementação do Home e Discovery
+- "etapa 3 agora" - Inicia implementação da Categorização e Busca
+- "etapa 4 agora" - Inicia implementação do Produto e Carrinho
+- "etapa 5 agora" - Inicia implementação da Personalização e Social
 
 ## Project info
 
