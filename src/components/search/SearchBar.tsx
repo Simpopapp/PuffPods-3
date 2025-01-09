@@ -41,7 +41,11 @@ export function SearchBar({ onSearch }: SearchBarProps) {
   };
 
   return (
-    <div className="relative w-full max-w-2xl mx-auto">
+    <motion.div 
+      initial={{ opacity: 0, y: -20 }}
+      animate={{ opacity: 1, y: 0 }}
+      className="relative w-full max-w-2xl mx-auto"
+    >
       <div className="flex gap-2">
         <div className="relative flex-1">
           <Input
@@ -50,21 +54,24 @@ export function SearchBar({ onSearch }: SearchBarProps) {
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
             onFocus={() => setShowRecent(true)}
-            className="pr-10"
+            className="pr-10 h-12 text-lg bg-secondary/80 border-0 focus:ring-2 ring-gold/50"
           />
           {searchTerm && (
             <Button
               variant="ghost"
               size="icon"
-              className="absolute right-2 top-1/2 -translate-y-1/2 h-8 w-8"
+              className="absolute right-2 top-1/2 -translate-y-1/2 h-8 w-8 hover:bg-transparent"
               onClick={handleClear}
             >
               <X className="h-4 w-4" />
             </Button>
           )}
         </div>
-        <Button onClick={handleSearch}>
-          <Search className="h-4 w-4 mr-2" />
+        <Button 
+          onClick={handleSearch}
+          className="h-12 px-6 bg-gradient-gold text-black hover:bg-gold/90"
+        >
+          <Search className="h-5 w-5 mr-2" />
           Buscar
         </Button>
       </div>
@@ -75,30 +82,37 @@ export function SearchBar({ onSearch }: SearchBarProps) {
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
-            className="absolute w-full mt-2 bg-background border rounded-md shadow-lg z-50"
+            className="absolute w-full mt-2 bg-secondary/95 backdrop-blur-lg border border-gold/20 rounded-lg shadow-lg z-50"
           >
             <ScrollArea className="h-auto max-h-[200px]">
-              <div className="p-2">
-                <h3 className="text-sm font-medium mb-2 text-muted-foreground">Buscas recentes</h3>
+              <div className="p-4">
+                <h3 className="text-sm font-medium mb-3 text-gold">Buscas recentes</h3>
                 {recentSearches.map((term, index) => (
-                  <Button
+                  <motion.div
                     key={index}
-                    variant="ghost"
-                    className="w-full justify-start text-left mb-1"
-                    onClick={() => {
-                      setSearchTerm(term);
-                      onSearch(term);
-                      setShowRecent(false);
-                    }}
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: index * 0.1 }}
                   >
-                    {term}
-                  </Button>
+                    <Button
+                      variant="ghost"
+                      className="w-full justify-start text-left mb-1 hover:bg-gold/10"
+                      onClick={() => {
+                        setSearchTerm(term);
+                        onSearch(term);
+                        setShowRecent(false);
+                      }}
+                    >
+                      <Search className="h-4 w-4 mr-2 text-gold" />
+                      {term}
+                    </Button>
+                  </motion.div>
                 ))}
               </div>
             </ScrollArea>
           </motion.div>
         )}
       </AnimatePresence>
-    </div>
+    </motion.div>
   );
 }

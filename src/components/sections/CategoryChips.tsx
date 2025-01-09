@@ -11,18 +11,20 @@ interface CategoryChipsProps {
 export function CategoryChips({ categories, selectedCategory, onSelectCategory }: CategoryChipsProps) {
   return (
     <ScrollArea className="w-full whitespace-nowrap rounded-md">
-      <div className="flex space-x-2 p-4">
+      <div className="flex space-x-2 py-2">
         {categories.map((category, index) => (
           <motion.button
             key={category}
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.3, delay: index * 0.1 }}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
             className={cn(
-              "inline-flex items-center rounded-full px-4 py-2 text-sm font-semibold transition-colors",
+              "inline-flex items-center rounded-full px-6 py-2.5 text-sm font-semibold transition-all duration-300",
               selectedCategory === category
-                ? "bg-gold text-black"
-                : "bg-secondary text-foreground hover:bg-secondary/80"
+                ? "bg-gradient-gold text-black shadow-lg"
+                : "bg-secondary/80 text-foreground hover:bg-secondary/60"
             )}
             onClick={() => onSelectCategory(category)}
           >

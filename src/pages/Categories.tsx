@@ -15,6 +15,8 @@ import { SingleUnits } from "@/components/sections/SingleUnits";
 import { PackUnits } from "@/components/sections/PackUnits";
 import { AllPacks } from "@/components/sections/AllPacks";
 import { EconomyLine } from "@/components/sections/EconomyLine";
+import { useInView } from "react-intersection-observer";
+import { Sparkles } from "lucide-react";
 
 const categories = [
   "Todos",
@@ -39,48 +41,72 @@ const Categories = () => {
     puffCount: [0, 8000]
   });
 
+  const [ref, inView] = useInView({
+    triggerOnce: true,
+    threshold: 0.1
+  });
+
   const handleSearch = (term: string) => {
     setSearchTerm(term);
-    // Implementar lógica de busca
   };
 
   const handleFilterChange = (newFilters: FilterOptions) => {
     setFilters(newFilters);
-    // Implementar lógica de filtro
   };
 
   return (
-    <div className="min-h-screen bg-background pb-20">
+    <div className="min-h-screen bg-background">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="container mx-auto px-4 py-8"
+        className="container mx-auto px-4 py-8 space-y-8"
       >
-        <div className="space-y-6">
-          <h1 className="text-3xl font-bold">Categorias</h1>
+        <motion.div 
+          className="flex items-center gap-4 mb-8"
+          initial={{ opacity: 0, x: -20 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ delay: 0.2 }}
+        >
+          <Sparkles className="w-8 h-8 text-gold animate-pulse" />
+          <div>
+            <h1 className="text-4xl font-bold bg-gradient-gold text-transparent bg-clip-text">
+              Categorias
+            </h1>
+            <p className="text-gray-400 mt-1">
+              Explore nossa seleção premium de produtos
+            </p>
+          </div>
+        </motion.div>
+        
+        <div className="sticky top-0 z-50 bg-background/80 backdrop-blur-lg py-4 space-y-4 shadow-lg rounded-lg">
+          <SearchBar onSearch={handleSearch} />
           
-          <div className="flex flex-col gap-4">
-            <SearchBar onSearch={handleSearch} />
+          <div className="flex items-center justify-between gap-4">
+            <CategoryChips
+              categories={categories}
+              selectedCategory={selectedCategory}
+              onSelectCategory={setSelectedCategory}
+            />
             
-            <div className="flex items-center justify-between">
-              <CategoryChips
-                categories={categories}
-                selectedCategory={selectedCategory}
-                onSelectCategory={setSelectedCategory}
-              />
-              
-              <div className="flex items-center gap-2">
-                <ViewToggle view={view} onViewChange={setView} />
-                <FilterSheet onFilterChange={handleFilterChange} />
-              </div>
+            <div className="flex items-center gap-2">
+              <ViewToggle view={view} onViewChange={setView} />
+              <FilterSheet onFilterChange={handleFilterChange} />
             </div>
           </div>
+        </div>
 
+        <motion.div
+          ref={ref}
+          initial={{ opacity: 0 }}
+          animate={inView ? { opacity: 1 } : { opacity: 0 }}
+          transition={{ duration: 0.5 }}
+          className="space-y-16 pb-24"
+        >
           {selectedCategory === "Todos" && (
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              className="space-y-16 mt-8"
+              className="space-y-16"
             >
               <SingleUnits />
               <PackUnits />
@@ -103,7 +129,7 @@ const Categories = () => {
           {selectedCategory === "V60" && <V60Line />}
           {selectedCategory === "V80" && <V80Line />}
           {selectedCategory === "V150" && <V150Line />}
-        </div>
+        </motion.div>
       </motion.div>
     </div>
   );
