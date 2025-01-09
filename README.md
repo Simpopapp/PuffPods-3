@@ -1,56 +1,91 @@
 # PodsPuffs - Vape Store
 
-## Plano de Implementação Mobile-First
+## Plano de Implementação UX-First
 
-### Etapa 1: Navegação e Estrutura Base
-- Implementar bottom navigation bar fixa com ícones intuitivos
-- Criar páginas principais: Home, Categorias, Busca e Perfil
-- Desenvolver sistema de navegação por gestos
+### Etapa 1: Reformulação da Home
+- Implementar hero section com vídeo/animação de fundo
+- Criar carrossel de produtos em destaque com efeito parallax
+- Adicionar seção "Trending Now" com contadores de vendas em tempo real
+- Implementar preview rápido de produtos com gestos
+- Criar navegação por categorias com ícones animados
+- Adicionar barra de busca com sugestões inteligentes
+- Implementar sistema de notificações de ofertas
+
+### Etapa 2: Sistema de Navegação
+- Desenvolver bottom navigation com feedback tátil
+- Criar micro-interações para cada ação do usuário
 - Implementar transições suaves entre páginas
-- Criar header minimalista e adaptativo
-- Adicionar menu lateral com filtros rápidos
+- Adicionar gestos de navegação intuitivos
+- Criar breadcrumbs interativos
+- Implementar menu lateral com filtros rápidos
+- Adicionar indicadores de progresso
 
-### Etapa 2: Home e Discovery
-- Criar carrossel horizontal de destaques
-- Implementar seções de "Mais Vendidos" e "Novidades"
-- Adicionar cards compactos com informações essenciais
-- Desenvolver sistema de recomendações personalizadas
-- Implementar pull-to-refresh com animações
-- Criar preview rápido de produtos
+### Etapa 3: Experiência de Categorias
+- Criar grid dinâmico com cards responsivos
+- Implementar filtros com preview em tempo real
+- Adicionar ordenação com animações de reorganização
+- Criar visualização em lista/grid com transições
+- Implementar lazy loading com skeleton screens
+- Adicionar pull-to-refresh com animações
+- Criar sistema de tags interativas
 
-### Etapa 3: Categorização e Busca
-- Desenvolver grid visual de categorias
-- Criar sistema de tags e filtros dinâmicos
-- Implementar busca com sugestões em tempo real
-- Adicionar histórico de buscas recentes
-- Criar visualização em lista/grid alternável
-- Implementar filtros avançados em bottom sheet
+### Etapa 4: Sistema de Busca Avançado
+- Desenvolver busca com autocompleção
+- Criar histórico de buscas personalizadas
+- Implementar filtros dinâmicos com chips
+- Adicionar sugestões baseadas em tendências
+- Criar preview de resultados instantâneo
+- Implementar correção automática de termos
+- Adicionar busca por voz/imagem
 
-### Etapa 4: Produto e Carrinho
-- Redesenhar página de produto com gestos
-- Criar preview de produtos relacionados
-- Implementar carrinho flutuante minimalista
-- Adicionar animações de adição ao carrinho
-- Desenvolver checkout simplificado
-- Criar resumo de pedido expansível
+### Etapa 5: Cards e Previews
+- Redesenhar cards com informações essenciais
+- Criar preview expandido com gestos
+- Implementar badges dinâmicos de status
+- Adicionar indicadores de popularidade
+- Criar sistema de ratings visual
+- Implementar compartilhamento rápido
+- Adicionar animações de interação
 
-### Etapa 5: Personalização e Social
-- Implementar sistema de favoritos
-- Criar perfil do usuário personalizado
-- Adicionar histórico de compras visual
-- Desenvolver sistema de recompensas
-- Implementar compartilhamento de produtos
-- Criar feed de novidades personalizado
+### Etapa 6: Micro-interações
+- Criar feedback visual para cada ação
+- Implementar loading states personalizados
+- Adicionar tooltips contextuais
+- Criar animações de transição suaves
+- Implementar efeitos de hover
+- Adicionar feedback sonoro (opcional)
+- Criar indicadores de progresso
+
+### Etapa 7: Performance e Feedback
+- Implementar skeleton screens
+- Criar sistema de cache inteligente
+- Adicionar indicadores de carregamento
+- Implementar retry automático
+- Criar mensagens de erro amigáveis
+- Adicionar feedback de sucesso
+- Implementar sistema de logs
+
+### Etapa 8: Personalização
+- Criar temas dinâmicos
+- Implementar modo escuro/claro
+- Adicionar preferências de visualização
+- Criar layouts personalizáveis
+- Implementar atalhos customizáveis
+- Adicionar favoritos rápidos
+- Criar dashboard personalizado
 
 ## Como Implementar
 
-Para iniciar cada etapa do processo de implementação, basta enviar o comando correspondente:
+Para iniciar cada etapa do processo de implementação, envie o comando correspondente:
 
-- "etapa 1 agora" - Inicia implementação da Navegação e Estrutura Base
-- "etapa 2 agora" - Inicia implementação do Home e Discovery
-- "etapa 3 agora" - Inicia implementação da Categorização e Busca
-- "etapa 4 agora" - Inicia implementação do Produto e Carrinho
-- "etapa 5 agora" - Inicia implementação da Personalização e Social
+- "etapa 1 agora" - Inicia implementação da Reformulação da Home
+- "etapa 2 agora" - Inicia implementação do Sistema de Navegação
+- "etapa 3 agora" - Inicia implementação da Experiência de Categorias
+- "etapa 4 agora" - Inicia implementação do Sistema de Busca Avançado
+- "etapa 5 agora" - Inicia implementação dos Cards e Previews
+- "etapa 6 agora" - Inicia implementação das Micro-interações
+- "etapa 7 agora" - Inicia implementação da Performance e Feedback
+- "etapa 8 agora" - Inicia implementação da Personalização
 
 ## Project info
 
