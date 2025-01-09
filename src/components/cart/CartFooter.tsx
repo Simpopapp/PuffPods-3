@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
 import { toast } from "sonner";
 import { Separator } from "@/components/ui/separator";
+import { CartProgress } from "./CartProgress";
 
 interface CartFooterProps {
   total: number;
