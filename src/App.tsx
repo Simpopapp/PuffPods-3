@@ -7,6 +7,7 @@ import { CartProvider } from "@/contexts/CartContext";
 import { Cart } from "@/components/Cart";
 import { BottomNav } from "@/components/navigation/BottomNav";
 import { useIsMobile } from "@/hooks/use-mobile";
+import { cn } from "@/lib/utils";
 import Index from "./pages/Index";
 import ElfBar from "./pages/ElfBar";
 import LostMary from "./pages/LostMary";
