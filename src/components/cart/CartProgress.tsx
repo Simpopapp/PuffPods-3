@@ -7,7 +7,7 @@ interface CartProgressProps {
 
 export const CartProgress = ({ total }: CartProgressProps) => {
   const firstThreshold = 150;
-  const secondThreshold = 300; // Increased threshold for the second bar
+  const secondThreshold = 300;
   
   const getProgressToNextReward = () => {
     if (total < firstThreshold) {
@@ -17,9 +17,10 @@ export const CartProgress = ({ total }: CartProgressProps) => {
     const baseProgress = 75;
     const remainingProgress = 25;
     const progressAboveThreshold = ((total - firstThreshold) / (secondThreshold - firstThreshold)) * remainingProgress;
-    return baseProgress + progressAboveThreshold;
+    return Math.min(baseProgress + progressAboveThreshold, 100);
   };
 
+  // Only show second bar after first threshold is met
   const showSecondBar = total >= firstThreshold;
 
   return (
@@ -35,18 +36,24 @@ export const CartProgress = ({ total }: CartProgressProps) => {
           >
             <div className="flex justify-between text-sm">
               <span>Progresso para Frete Grátis</span>
-              <span className="text-gold">{Math.min(getProgressToNextReward(), 100).toFixed(0)}%</span>
+              <span className="text-gold">
+                {Math.min((total / firstThreshold) * 100, 100).toFixed(0)}%
+              </span>
             </div>
             <div className="h-2 bg-secondary rounded-full overflow-hidden">
               <motion.div
                 className="h-full bg-gradient-gold"
                 initial={{ width: 0 }}
-                animate={{ width: `${Math.min(getProgressToNextReward(), 100)}%` }}
+                animate={{ width: `${Math.min((total / firstThreshold) * 100, 100)}%` }}
                 transition={{ duration: 0.5 }}
               />
             </div>
             <div className="text-sm text-muted-foreground">
-              Faltam R$ {(firstThreshold - total).toFixed(2)} para Frete Grátis
+              {total < firstThreshold ? (
+                `Faltam R$ ${(firstThreshold - total).toFixed(2)} para Frete Grátis`
+              ) : (
+                "Frete Grátis Desbloqueado!"
+              )}
             </div>
           </motion.div>
         ) : (
@@ -59,13 +66,13 @@ export const CartProgress = ({ total }: CartProgressProps) => {
           >
             <div className="flex justify-between text-sm">
               <span>Progresso para Desconto VIP</span>
-              <span className="text-gold">{Math.min(getProgressToNextReward(), 100).toFixed(0)}%</span>
+              <span className="text-gold">{getProgressToNextReward().toFixed(0)}%</span>
             </div>
             <div className="h-2 bg-secondary rounded-full overflow-hidden">
               <motion.div
                 className="h-full bg-gradient-gold"
                 initial={{ width: `75%` }}
-                animate={{ width: `${Math.min(getProgressToNextReward(), 100)}%` }}
+                animate={{ width: `${getProgressToNextReward()}%` }}
                 transition={{ duration: 0.5 }}
               />
             </div>
