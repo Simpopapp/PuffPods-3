@@ -27,24 +27,24 @@ export const ProductSection = ({ title, children, className }: ProductSectionPro
       className={cn(className)}
     >
       <motion.div 
-        className="flex items-center gap-2 mb-8"
+        className="flex items-center gap-2 mb-6 px-4 sm:px-0"
         initial={{ opacity: 0, x: -20 }}
         animate={inView ? { opacity: 1, x: 0 } : {}}
         transition={{ duration: 0.5, delay: 0.2 }}
       >
-        <h2 className="text-3xl font-bold">{title}</h2>
+        <h2 className="text-2xl sm:text-3xl font-bold">{title}</h2>
         <motion.div
           animate={{ rotate: isExpanded ? 180 : 0 }}
           transition={{ duration: 0.3 }}
         >
-          <ChevronDown className="text-gold h-6 w-6" />
+          <ChevronDown className="text-gold h-5 w-5 sm:h-6 sm:w-6" />
         </motion.div>
       </motion.div>
       
       <AnimatePresence>
         <motion.div 
           className={cn(
-            "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8",
+            "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 px-4 sm:px-0",
             !isExpanded && "max-h-[800px] overflow-hidden relative"
           )}
           layout

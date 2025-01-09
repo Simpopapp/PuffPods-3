@@ -52,7 +52,7 @@ export function ProductCard({ id, name, description, price, image, time, onClick
       <div ref={ref} className="w-full">
         <Card className="bg-secondary border-0">
           <CardHeader className="p-0">
-            <Skeleton className={isMobile ? "h-32" : "h-48"} />
+            <Skeleton className="h-48 sm:h-32" />
           </CardHeader>
           <CardContent className="p-4">
             <Skeleton className="h-6 w-3/4 mb-2" />
@@ -88,7 +88,7 @@ export function ProductCard({ id, name, description, price, image, time, onClick
         )}
 
         <CardHeader className="p-0">
-          <div className={`relative ${isMobile ? "h-32" : "h-48"} overflow-hidden`}>
+          <div className="relative h-48 sm:h-32 overflow-hidden">
             <motion.img
               src={image}
               alt={name}
@@ -106,26 +106,26 @@ export function ProductCard({ id, name, description, price, image, time, onClick
           </div>
         </CardHeader>
 
-        <CardContent className={`${isMobile ? "p-3" : "p-6"}`}>
+        <CardContent className="p-3 sm:p-4">
           <motion.div
             initial={{ y: 10, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ delay: 0.2 }}
           >
-            <CardTitle className={`${isMobile ? "text-lg" : "text-xl"} mb-2 text-gold group-hover:text-white transition-colors duration-300`}>
+            <CardTitle className="text-lg sm:text-xl mb-2 text-gold group-hover:text-white transition-colors duration-300">
               {name}
             </CardTitle>
-            <p className={`${isMobile ? "text-xs" : "text-sm"} text-gray-400 mb-2 group-hover:text-gray-300 transition-colors duration-300 line-clamp-2`}>
+            <p className="text-xs sm:text-sm text-gray-400 mb-2 group-hover:text-gray-300 transition-colors duration-300 line-clamp-2">
               {description}
             </p>
             {time && (
               <div className="flex items-center gap-2 text-sm text-gray-400 mb-2 group-hover:text-gray-300 transition-colors duration-300">
                 <Clock className="h-4 w-4 text-gold" />
-                <span className={isMobile ? "text-xs" : "text-sm"}>{time}</span>
+                <span className="text-xs sm:text-sm">{time}</span>
               </div>
             )}
             <motion.p 
-              className={`${isMobile ? "text-xl" : "text-2xl"} font-bold text-gold group-hover:scale-110 origin-left transition-transform duration-300`}
+              className="text-xl sm:text-2xl font-bold text-gold group-hover:scale-110 origin-left transition-transform duration-300"
               whileHover={{ scale: 1.1 }}
             >
               R$ {price.toFixed(2)}
@@ -133,7 +133,7 @@ export function ProductCard({ id, name, description, price, image, time, onClick
           </motion.div>
         </CardContent>
 
-        <CardFooter className={isMobile ? "p-3" : "p-6"}>
+        <CardFooter className="p-3 sm:p-4">
           <Button
             className="w-full bg-gradient-gold text-black hover:bg-gold group-hover:scale-105 transition-all duration-300"
             onClick={handleBuy}
@@ -145,7 +145,7 @@ export function ProductCard({ id, name, description, price, image, time, onClick
               transition={{ delay: 0.3 }}
               className="flex items-center gap-2"
             >
-              <ShoppingCart className={`${isMobile ? "h-3 w-3" : "h-4 w-4"}`} />
+              <ShoppingCart className="h-3 w-3 sm:h-4 sm:w-4" />
               {isMobile ? "Comprar" : "Comprar Agora"}
             </motion.span>
           </Button>
