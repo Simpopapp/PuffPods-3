@@ -9,12 +9,23 @@ import { CartProgress } from "./cart/CartProgress";
 import { CartItem } from "./cart/CartItem";
 import { CartFooter } from "./cart/CartFooter";
 import { Gift } from "lucide-react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { toast } from "sonner";
 
 export function Cart() {
   const { items, removeItem, updateQuantity, total, itemCount } = useCart();
   const [isOpen, setIsOpen] = useState(false);
+  const [showArrow, setShowArrow] = useState(false);
+
+  useEffect(() => {
+    if (itemCount > 0 && !isOpen) {
+      setShowArrow(true);
+      const timer = setTimeout(() => {
+        setShowArrow(false);
+      }, 2000);
+      return () => clearTimeout(timer);
+    }
+  }, [itemCount, isOpen]);
 
   return (
     <Sheet open={isOpen} onOpenChange={setIsOpen}>
@@ -42,14 +53,39 @@ export function Cart() {
         </SheetTrigger>
 
         <AnimatePresence>
-          {!isOpen && itemCount > 0 && (
+          {showArrow && !isOpen && (
             <motion.div
-              initial={{ opacity: 0, x: 50 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: 50 }}
+              initial={{ opacity: 0, x: 50, scale: 0.5 }}
+              animate={{ 
+                opacity: 1, 
+                x: 0, 
+                scale: 1,
+                transition: {
+                  type: "spring",
+                  stiffness: 200,
+                  damping: 15
+                }
+              }}
+              exit={{ 
+                opacity: 0, 
+                x: -20, 
+                scale: 0.5,
+                transition: { duration: 0.2 }
+              }}
               className="absolute left-[-100px] top-1/2 transform -translate-y-1/2"
             >
-              <ArrowRight className="h-8 w-8 text-gold animate-pulse" />
+              <motion.div
+                animate={{
+                  x: [0, 10, 0],
+                }}
+                transition={{
+                  duration: 1,
+                  repeat: Infinity,
+                  ease: "easeInOut"
+                }}
+              >
+                <ArrowRight className="h-8 w-8 text-gold drop-shadow-lg" />
+              </motion.div>
             </motion.div>
           )}
         </AnimatePresence>
