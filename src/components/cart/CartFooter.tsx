@@ -2,7 +2,6 @@ import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
 import { toast } from "sonner";
 import { Separator } from "@/components/ui/separator";
-import { CartProgress } from "./CartProgress";
 
 interface CartFooterProps {
   total: number;
@@ -17,7 +16,6 @@ export const CartFooter = ({ total }: CartFooterProps) => {
       className="mt-auto pt-4 border-t border-gold/20 bg-background space-y-4"
     >
       <div className="space-y-4">
-        <CartProgress total={total} />
         <Separator className="bg-gold/20" />
         <div className="flex justify-between items-center">
           <span className="text-lg font-semibold">Total</span>
