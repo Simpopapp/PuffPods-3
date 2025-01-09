@@ -1,47 +1,30 @@
-# Sistema de Design Tokens
+# Black Gold Style System
 
-Este sistema foi criado para facilitar a manutenção e consistência do design em todo o projeto.
+This is a comprehensive design system for creating elegant black and gold themed interfaces. Each aspect of the design system is documented in its own file for better organization:
 
-## Como usar
+- [Color System](./styles/COLOR_SYSTEM.md)
+- [Typography](./styles/TYPOGRAPHY.md)
+- [Layout](./styles/LAYOUT.md)
+- [Effects](./styles/EFFECTS.md)
 
-1. **Importação básica**:
-```typescript
-import { themeTokens, getThemeToken } from './tokens';
-```
+## Quick Start
 
-2. **Acessando tokens**:
-```typescript
-// Cor primária
-const primaryColor = themeTokens.colors.brand.primary;
+1. Copy the `theme` folder to your project
+2. Import the tokens from `tokens.ts`
+3. Configure your Tailwind CSS using the provided values
+4. Use the utility classes in your components
 
-// Espaçamento
-const spacing = themeTokens.spacing.md;
+## Example Usage
 
-// Usando o helper
-const color = getThemeToken('colors', 'brand', 'primary');
-```
-
-3. **Em componentes Tailwind**:
-```typescript
-<div className="bg-[#FFB800] text-[length:var(--font-size-base)]">
-  Conteúdo
+```tsx
+<div className="bg-background text-foreground">
+  <h1 className="text-2xl font-bold bg-gradient-gold bg-clip-text text-transparent">
+    Black Gold Header
+  </h1>
+  <div className="bg-secondary p-4 rounded-lg hover:shadow-lg hover:shadow-gold/20 transition-all">
+    Content with gold accent
+  </div>
 </div>
 ```
 
-## Estrutura
-
-- **colors**: Cores do sistema
-- **typography**: Fontes e tamanhos
-- **spacing**: Sistema de espaçamento
-- **borders**: Bordas e raios
-- **shadows**: Sistema de sombras
-- **breakpoints**: Pontos de quebra responsivos
-- **animations**: Configurações de animação
-
-## Benefícios
-
-1. Manutenção centralizada
-2. Tipagem forte com TypeScript
-3. Fácil de entender e modificar
-4. Documentação clara
-5. Consistência visual garantida
+For detailed implementation guidelines, check each specific documentation file.
