@@ -5,6 +5,7 @@ import { Search, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { useIsMobile } from "@/hooks/use-mobile";
+import { cn } from "@/lib/utils";
 
 interface SearchBarProps {
   onSearch: (term: string) => void;
