@@ -66,7 +66,7 @@ export function Cart() {
               }}
               className="absolute right-[120%] top-1/2 transform -translate-y-1/2"
             >
-              <ArrowRight className="h-6 w-6 text-gold" />
+              <ArrowRight className="h-12 w-12 text-gold" /> {/* Aumentado de h-6 w-6 para h-12 w-12 */}
             </motion.div>
           )}
         </AnimatePresence>
