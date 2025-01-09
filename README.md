@@ -1,6 +1,7 @@
 # PodsPuffs - Vape Store
 
-## Plano de Reconstrução Mobile-First
+## Design System
+Para implementar a identidade visual do projeto, consulte nossa documentação detalhada em [Design System](src/theme/DESIGN_SYSTEM.md).
 
 ### 1. Base Structure & Typography
 - Simplificar a estrutura base do layout
@@ -266,3 +267,4 @@ Simply open [Lovable](https://lovable.dev/projects/d4247768-3bde-4df5-8414-9a41d
 ## I want to use a custom domain - is that possible?
 
 We don't support custom domains (yet). If you want to deploy your project under your own domain then we recommend using Netlify. Visit our docs for more details: [Custom domains](https://docs.lovable.dev/tips-tricks/custom-domain/)
+
