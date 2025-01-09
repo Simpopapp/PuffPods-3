@@ -1,5 +1,4 @@
 import React, { createContext, useContext, useState, useEffect } from "react";
-import { toast } from "sonner";
 
 interface CartItem {
   id: string;
@@ -36,7 +35,6 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
       const existingItem = currentItems.find((item) => item.id === newItem.id);
       
       if (existingItem) {
-        toast.info("Item já está no carrinho!");
         return currentItems.map((item) =>
           item.id === newItem.id
             ? { ...item, quantity: item.quantity + 1 }
@@ -44,14 +42,12 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
         );
       }
 
-      toast.success("Item adicionado ao carrinho!");
       return [...currentItems, { ...newItem, quantity: 1 }];
     });
   };
 
   const removeItem = (id: string) => {
     setItems((currentItems) => currentItems.filter((item) => item.id !== id));
-    toast.success("Item removido do carrinho!");
   };
 
   const updateQuantity = (id: string, quantity: number) => {
@@ -66,7 +62,6 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
 
   const clearCart = () => {
     setItems([]);
-    toast.success("Carrinho limpo!");
   };
 
   const total = items.reduce((sum, item) => sum + item.price * item.quantity, 0);
