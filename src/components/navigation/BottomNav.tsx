@@ -1,12 +1,12 @@
-import { Home, Search, ShoppingBag, User } from "lucide-react";
+import { Home, Search, Grid, User } from "lucide-react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { cn } from "@/lib/utils";
 import { motion } from "framer-motion";
 
 const navItems = [
   { icon: Home, label: "Home", route: "/" },
+  { icon: Grid, label: "Categorias", route: "/categories" },
   { icon: Search, label: "Buscar", route: "/search" },
-  { icon: ShoppingBag, label: "Produtos", route: "/products" },
   { icon: User, label: "Perfil", route: "/profile" }
 ];
 
@@ -32,7 +32,9 @@ export function BottomNav() {
               onClick={() => navigate(item.route)}
               className="flex flex-col items-center justify-center w-full h-full"
             >
-              <div
+              <motion.div
+                initial={false}
+                animate={isActive ? { scale: 1.1 } : { scale: 1 }}
                 className={cn(
                   "flex flex-col items-center transition-colors",
                   isActive ? "text-gold" : "text-muted-foreground"
@@ -40,7 +42,7 @@ export function BottomNav() {
               >
                 <Icon className="w-5 h-5 mb-1" />
                 <span className="text-xs">{item.label}</span>
-              </div>
+              </motion.div>
             </button>
           );
         })}
