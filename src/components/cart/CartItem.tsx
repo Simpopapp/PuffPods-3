@@ -1,7 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Plus, Minus, Trash2, Sparkles } from "lucide-react";
 import { motion } from "framer-motion";
-import { toast } from "sonner";
 import { useCart } from "@/contexts/CartContext";
 
 interface CartItemProps {
@@ -28,10 +27,6 @@ export const CartItem = ({
   
   const handleQuantityChange = (newQuantity: number) => {
     if (newQuantity > 0) {
-      const difference = newQuantity - quantity;
-      if (difference > 0) {
-        toast.success("Ótima escolha! Quanto mais itens, maiores os benefícios! ✨");
-      }
       onQuantityChange(id, newQuantity);
     }
   };
