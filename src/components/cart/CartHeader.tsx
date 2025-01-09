@@ -20,7 +20,10 @@ export const CartHeader = () => {
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: -20 }}
               transition={{ duration: 0.5, ease: "easeOut" }}
-              className="text-gradient bg-gradient-gold ml-2 text-lg font-light italic"
+              className="text-gradient bg-gradient-gold ml-4 text-xl font-medium tracking-wider italic relative"
+              style={{
+                textShadow: "0 0 10px rgba(255, 184, 0, 0.3)",
+              }}
             >
               Premium
             </motion.span>
