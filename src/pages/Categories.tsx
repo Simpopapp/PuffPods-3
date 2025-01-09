@@ -1,20 +1,10 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { SearchBar } from "@/components/search/SearchBar";
-import { FilterSheet, FilterOptions } from "@/components/search/FilterSheet";
+import { FilterSheet } from "@/components/search/FilterSheet";
 import { ViewToggle } from "@/components/search/ViewToggle";
 import { CategoryChips } from "@/components/sections/CategoryChips";
 import { ProductGrid } from "@/components/sections/ProductGrid";
-import { V15Line } from "@/components/sections/V15Line";
-import { V35Line } from "@/components/sections/V35Line";
-import { V50Line } from "@/components/sections/V50Line";
-import { V60Line } from "@/components/sections/V60Line";
-import { V80Line } from "@/components/sections/V80Line";
-import { V150Line } from "@/components/sections/V150Line";
-import { SingleUnits } from "@/components/sections/SingleUnits";
-import { PackUnits } from "@/components/sections/PackUnits";
-import { AllPacks } from "@/components/sections/AllPacks";
-import { EconomyLine } from "@/components/sections/EconomyLine";
 import { useInView } from "react-intersection-observer";
 import { Sparkles } from "lucide-react";
 
@@ -31,14 +21,35 @@ const categories = [
   "V150"
 ];
 
+// Dados mockados para exemplo
+const mockProducts = [
+  {
+    id: "1",
+    name: "Ignite V150",
+    description: "Pod descartável com 7000 puffs",
+    price: 149.90,
+    image: "/placeholder.svg",
+    category: "V150"
+  },
+  {
+    id: "2",
+    name: "Ignite V80",
+    description: "Pod descartável com 5000 puffs",
+    price: 119.90,
+    image: "/placeholder.svg",
+    category: "V80"
+  },
+  // ... Adicione mais produtos conforme necessário
+];
+
 const Categories = () => {
   const [selectedCategory, setSelectedCategory] = useState("Todos");
   const [view, setView] = useState<"grid" | "list">("grid");
   const [searchTerm, setSearchTerm] = useState("");
-  const [filters, setFilters] = useState<FilterOptions>({
-    priceRange: [0, 1000],
-    categories: [],
-    puffCount: [0, 8000]
+  const [filters, setFilters] = useState({
+    priceRange: [0, 1000] as [number, number],
+    categories: [] as string[],
+    puffCount: [0, 8000] as [number, number]
   });
 
   const [ref, inView] = useInView({
@@ -50,9 +61,19 @@ const Categories = () => {
     setSearchTerm(term);
   };
 
-  const handleFilterChange = (newFilters: FilterOptions) => {
+  const handleFilterChange = (newFilters: any) => {
     setFilters(newFilters);
   };
+
+  // Filtra os produtos com base nos critérios
+  const filteredProducts = mockProducts.filter(product => {
+    const matchesSearch = product.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                         product.description.toLowerCase().includes(searchTerm.toLowerCase());
+    const matchesCategory = selectedCategory === "Todos" || product.category === selectedCategory;
+    const matchesPrice = product.price >= filters.priceRange[0] && product.price <= filters.priceRange[1];
+    
+    return matchesSearch && matchesCategory && matchesPrice;
+  });
 
   return (
     <div className="min-h-screen bg-background">
@@ -100,35 +121,11 @@ const Categories = () => {
           initial={{ opacity: 0 }}
           animate={inView ? { opacity: 1 } : { opacity: 0 }}
           transition={{ duration: 0.5 }}
-          className="space-y-16 pb-24"
         >
-          {selectedCategory === "Todos" && (
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              className="space-y-16"
-            >
-              <SingleUnits />
-              <PackUnits />
-              <EconomyLine />
-              <V15Line />
-              <V35Line />
-              <V50Line />
-              <V60Line />
-              <V80Line />
-              <V150Line />
-            </motion.div>
-          )}
-
-          {selectedCategory === "Unidades" && <SingleUnits />}
-          {selectedCategory === "Packs" && <PackUnits />}
-          {selectedCategory === "Econômicos" && <EconomyLine />}
-          {selectedCategory === "V15" && <V15Line />}
-          {selectedCategory === "V35" && <V35Line />}
-          {selectedCategory === "V50" && <V50Line />}
-          {selectedCategory === "V60" && <V60Line />}
-          {selectedCategory === "V80" && <V80Line />}
-          {selectedCategory === "V150" && <V150Line />}
+          <ProductGrid 
+            products={filteredProducts}
+            selectedCategory={selectedCategory}
+          />
         </motion.div>
       </motion.div>
     </div>
