@@ -69,7 +69,15 @@ export default function Product() {
   };
 
   const handleAddToCart = () => {
-    addItem({ ...product, quantity });
+    const itemToAdd = {
+      id: product.id,
+      name: product.name,
+      price: product.price,
+      image: product.image,
+      quantity: quantity
+    };
+    
+    addItem(itemToAdd);
     toast.success("Produto adicionado ao carrinho!", {
       description: `${quantity}x ${product.name}`,
     });
