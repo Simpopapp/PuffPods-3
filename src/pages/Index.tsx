@@ -8,6 +8,13 @@ import { PremiumSection } from "@/components/PremiumSection";
 import { PremiumSection2 } from "@/components/PremiumSection2";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { cn } from "@/lib/utils";
+import { V150Line } from "@/components/sections/V150Line";
+import { V80Line } from "@/components/sections/V80Line";
+import { V60Line } from "@/components/sections/V60Line";
+import { V50Line } from "@/components/sections/V50Line";
+import { V35Line } from "@/components/sections/V35Line";
+import { SingleUnits } from "@/components/sections/SingleUnits";
+import { PackUnits } from "@/components/sections/PackUnits";
 
 const Index = () => {
   const controls = useAnimation();
@@ -80,6 +87,21 @@ const Index = () => {
 
           {/* Recomendações */}
           <Recommendations />
+
+          {/* Linhas de Produtos */}
+          <div className="container mx-auto px-4">
+            <V150Line />
+            <V80Line />
+            <V60Line />
+            <V50Line />
+            <V35Line />
+          </div>
+
+          {/* Unidades e Packs */}
+          <div className="container mx-auto px-4">
+            <SingleUnits />
+            <PackUnits />
+          </div>
         </motion.div>
       </main>
     </div>
