@@ -1,6 +1,6 @@
 # Black Gold Style System
 
-This is a comprehensive design system for creating elegant black and gold themed interfaces. Each aspect of the design system is documented in its own file for better organization:
+A comprehensive design system for creating elegant black and gold themed interfaces. Each aspect of the design system is documented in its own file for better organization:
 
 - [Color System](./styles/COLOR_SYSTEM.md)
 - [Typography](./styles/TYPOGRAPHY.md)
