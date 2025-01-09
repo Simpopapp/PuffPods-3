@@ -56,13 +56,16 @@ export function SearchBar({ onSearch }: SearchBarProps) {
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
             onFocus={() => setShowRecent(true)}
-            className={`${isMobile ? "h-10 text-base" : "h-12 text-lg"} pr-10 bg-secondary/80 border-0 focus:ring-2 ring-gold/50`}
+            className={cn(
+              "pr-10 bg-secondary/80 border-0 focus:ring-2 ring-gold/50",
+              isMobile ? "h-10 text-sm" : "h-12 text-base"
+            )}
           />
           {searchTerm && (
             <Button
               variant="ghost"
               size="icon"
-              className="absolute right-2 top-1/2 -translate-y-1/2 h-8 w-8 hover:bg-transparent"
+              className="absolute right-2 top-1/2 -translate-y-1/2 h-6 w-6 hover:bg-transparent"
               onClick={handleClear}
             >
               <X className="h-4 w-4" />
@@ -71,10 +74,13 @@ export function SearchBar({ onSearch }: SearchBarProps) {
         </div>
         <Button 
           onClick={handleSearch}
-          className={`${isMobile ? "h-10 px-4" : "h-12 px-6"} bg-gradient-gold text-black hover:bg-gold/90`}
+          className={cn(
+            "bg-gradient-gold text-black hover:bg-gold/90",
+            isMobile ? "h-10 px-3 min-w-10" : "h-12 px-6"
+          )}
         >
-          <Search className={`${isMobile ? "h-4 w-4" : "h-5 w-5"} ${!isMobile && "mr-2"}`} />
-          {!isMobile && "Buscar"}
+          <Search className={isMobile ? "h-4 w-4" : "h-5 w-5"} />
+          {!isMobile && <span className="ml-2">Buscar</span>}
         </Button>
       </div>
 
@@ -87,8 +93,8 @@ export function SearchBar({ onSearch }: SearchBarProps) {
             className="absolute w-full mt-2 bg-secondary/95 backdrop-blur-lg border border-gold/20 rounded-lg shadow-lg z-50"
           >
             <ScrollArea className="h-auto max-h-[200px]">
-              <div className="p-4">
-                <h3 className="text-sm font-medium mb-3 text-gold">Buscas recentes</h3>
+              <div className="p-3 sm:p-4">
+                <h3 className="text-sm font-medium mb-2 text-gold">Buscas recentes</h3>
                 {recentSearches.map((term, index) => (
                   <motion.div
                     key={index}
@@ -98,14 +104,14 @@ export function SearchBar({ onSearch }: SearchBarProps) {
                   >
                     <Button
                       variant="ghost"
-                      className="w-full justify-start text-left mb-1 hover:bg-gold/10"
+                      className="w-full justify-start text-left mb-1 hover:bg-gold/10 text-sm h-9"
                       onClick={() => {
                         setSearchTerm(term);
                         onSearch(term);
                         setShowRecent(false);
                       }}
                     >
-                      <Search className="h-4 w-4 mr-2 text-gold" />
+                      <Search className="h-3 w-3 mr-2 text-gold" />
                       {term}
                     </Button>
                   </motion.div>
