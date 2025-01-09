@@ -7,7 +7,7 @@ interface CartFooterProps {
 }
 
 export const CartFooter = ({ total }: CartFooterProps) => {
-  const isPremium = total >= 150;
+  const isPremium = total >= 200;
 
   return (
     <motion.div
@@ -24,9 +24,9 @@ export const CartFooter = ({ total }: CartFooterProps) => {
             <span className="text-lg font-bold text-gold">
               R$ {total.toFixed(2)}
             </span>
-            {total >= 200 && (
+            {total >= 300 && (
               <div className="text-sm text-gold-light">
-                Economia: R$ {(total * 0.05).toFixed(2)}
+                Economia: R$ {(total * 0.1).toFixed(2)}
               </div>
             )}
           </div>

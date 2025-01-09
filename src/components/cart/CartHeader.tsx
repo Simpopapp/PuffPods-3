@@ -5,7 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 
 export const CartHeader = () => {
   const { total } = useCart();
-  const showPremium = total >= 150;
+  const showPremium = total >= 200;
 
   return (
     <SheetHeader className="space-y-4 pb-4 border-b border-gold/20">
