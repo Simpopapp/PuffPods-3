@@ -1,6 +1,5 @@
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
-import { toast } from "sonner";
 import { Separator } from "@/components/ui/separator";
 
 interface CartFooterProps {
@@ -45,7 +44,6 @@ export const CartFooter = ({ total }: CartFooterProps) => {
           letterSpacing: "0.05em",
         } : undefined}
         onClick={() => {
-          toast.success(isPremium ? "Preparando seu pedido premium! 🌟" : "Preparando seu pedido! 📦");
           console.log('Iniciando checkout...');
         }}
       >

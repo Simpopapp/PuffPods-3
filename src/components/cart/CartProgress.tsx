@@ -1,4 +1,4 @@
-import { AnimatePresence } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import { ProgressBar } from "./progress/ProgressBar";
 import { UnlockedBenefits } from "./progress/UnlockedBenefits";
 
@@ -18,8 +18,23 @@ export const CartProgress = ({ total }: CartProgressProps) => {
     return Math.min(75 + additionalProgress, 100);
   };
 
+  const justUnlockedFreeShipping = total >= firstThreshold && total < firstThreshold + 0.01;
+
   return (
-    <div className="space-y-2">
+    <motion.div 
+      className="space-y-2"
+      animate={justUnlockedFreeShipping ? {
+        background: [
+          "rgba(255, 184, 0, 0)",
+          "rgba(255, 184, 0, 0.2)",
+          "rgba(255, 184, 0, 0)"
+        ],
+      } : {}}
+      transition={{
+        duration: 1.5,
+        ease: "easeInOut",
+      }}
+    >
       <AnimatePresence mode="wait">
         {total < firstThreshold ? (
           <ProgressBar
@@ -46,6 +61,6 @@ export const CartProgress = ({ total }: CartProgressProps) => {
           showVipDiscount={total >= secondThreshold}
         />
       </AnimatePresence>
-    </div>
+    </motion.div>
   );
 };
