@@ -6,6 +6,7 @@ import { toast } from "sonner";
 import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import { ShoppingCart } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 interface ProductCardProps {
   id: string;
@@ -20,12 +21,14 @@ interface ProductCardProps {
 
 export function ProductCard({ id, name, description, price, image, time, onClick, isCartOpen = false }: ProductCardProps) {
   const { addItem } = useCart();
+  const navigate = useNavigate();
   const [ref, inView] = useInView({
     triggerOnce: true,
     threshold: 0.1
   });
 
-  const handleBuy = () => {
+  const handleBuy = (e: React.MouseEvent) => {
+    e.stopPropagation();
     addItem({ id, name, price, image });
     if (!isCartOpen) {
       toast.success("Produto adicionado ao carrinho! 🛍️", {
@@ -35,6 +38,10 @@ export function ProductCard({ id, name, description, price, image, time, onClick
     if (onClick) {
       onClick();
     }
+  };
+
+  const handleClick = () => {
+    navigate(`/product/${id}`);
   };
 
   if (!inView) {
@@ -65,8 +72,9 @@ export function ProductCard({ id, name, description, price, image, time, onClick
       transition={{ duration: 0.5 }}
       whileHover={{ scale: 1.02 }}
       className="w-full"
+      onClick={handleClick}
     >
-      <Card className="bg-secondary border-0 overflow-hidden group relative">
+      <Card className="bg-secondary border-0 overflow-hidden group relative cursor-pointer">
         <motion.div
           className="absolute top-4 right-4 z-10 bg-black/80 rounded-full p-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
           whileHover={{ scale: 1.1 }}
@@ -83,6 +91,7 @@ export function ProductCard({ id, name, description, price, image, time, onClick
               loading="lazy"
               whileHover={{ scale: 1.1 }}
               transition={{ duration: 0.3 }}
+              layoutId={`product-image-${id}`}
             />
             <motion.div 
               className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"

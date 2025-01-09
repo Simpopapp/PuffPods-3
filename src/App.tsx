@@ -9,6 +9,7 @@ import Index from "./pages/Index";
 import ElfBar from "./pages/ElfBar";
 import LostMary from "./pages/LostMary";
 import OxBar from "./pages/OxBar";
+import Product from "./pages/Product";
 
 const queryClient = new QueryClient();
 
@@ -26,6 +27,7 @@ const App = () => {
                 <Route path="/elfbar" element={<ElfBar />} />
                 <Route path="/lostmary" element={<LostMary />} />
                 <Route path="/oxbar" element={<OxBar />} />
+                <Route path="/product/:id" element={<Product />} />
               </Routes>
             </AppLayout>
           </BrowserRouter>
