@@ -17,9 +17,10 @@ interface ProductCardProps {
   time?: string;
   onClick?: () => void;
   isCartOpen?: boolean;
+  className?: string;
 }
 
-export function ProductCard({ id, name, description, price, image, time, onClick, isCartOpen = false }: ProductCardProps) {
+export function ProductCard({ id, name, description, price, image, time, onClick, isCartOpen = false, className }: ProductCardProps) {
   const { addItem } = useCart();
   const navigate = useNavigate();
   const [ref, inView] = useInView({
@@ -71,7 +72,7 @@ export function ProductCard({ id, name, description, price, image, time, onClick
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
       whileHover={{ scale: 1.02 }}
-      className="w-full"
+      className={`w-full ${className}`}
       onClick={handleClick}
     >
       <Card className="bg-secondary border-0 overflow-hidden group relative cursor-pointer">

@@ -42,25 +42,34 @@ export function FilterSheet({ onFilterChange }: FilterSheetProps) {
       ? filters.categories.filter(c => c !== category)
       : [...filters.categories, category];
     
-    const newFilters = { ...filters, categories: updated };
+    const newFilters: FilterOptions = { 
+      ...filters, 
+      categories: updated 
+    };
     setFilters(newFilters);
     onFilterChange(newFilters);
   };
 
   const handlePriceChange = (value: number[]) => {
-    const newFilters = { ...filters, priceRange: value as [number, number] };
+    const newFilters: FilterOptions = { 
+      ...filters, 
+      priceRange: [value[0], value[1]] as [number, number] 
+    };
     setFilters(newFilters);
     onFilterChange(newFilters);
   };
 
   const handlePuffCountChange = (value: number[]) => {
-    const newFilters = { ...filters, puffCount: value as [number, number] };
+    const newFilters: FilterOptions = { 
+      ...filters, 
+      puffCount: [value[0], value[1]] as [number, number] 
+    };
     setFilters(newFilters);
     onFilterChange(newFilters);
   };
 
   const resetFilters = () => {
-    const defaultFilters = {
+    const defaultFilters: FilterOptions = {
       priceRange: [0, 1000],
       categories: [],
       puffCount: [0, 8000]

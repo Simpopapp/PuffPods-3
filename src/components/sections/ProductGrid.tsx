@@ -44,12 +44,10 @@ export function ProductGrid({ products, selectedCategory, view }: ProductGridPro
                 delay: index * 0.1,
                 layout: { duration: 0.3 }
               }}
-              className={view === "list" ? "w-full" : ""}
             >
               <ProductCard 
-                {...product} 
+                {...product}
                 time={`${product.puffCount} puffs`}
-                className={view === "list" ? "flex-row" : ""}
               />
             </motion.div>
           ))
