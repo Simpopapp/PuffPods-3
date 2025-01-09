@@ -70,12 +70,12 @@ const Index = () => {
         </header>
       ) : (
         <header className="container mx-auto py-20 text-center">
-          <h1 className="text-5xl font-bold mb-4">Ignite Vape Store</h1>
+          <h1 className="text-5xl font-bold mb-4">PodsPuffs - Vape Store</h1>
           <p className="text-xl text-gray-400 mb-8">A melhor seleção de pods descartáveis Ignite</p>
         </header>
       )}
 
-      {/* Premium Section - Top */}
+      {/* Rest of the components */}
       <section className="container mx-auto mb-20">
         <PremiumSection onButtonClick={() => {
           document.getElementById('v150-section')?.scrollIntoView({ behavior: 'smooth' });
