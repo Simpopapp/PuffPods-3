@@ -13,8 +13,11 @@ export function CategoryChips({ categories, selectedCategory, onSelectCategory }
   const isMobile = useIsMobile();
 
   return (
-    <ScrollArea className="w-full whitespace-nowrap rounded-md">
-      <div className="flex space-x-2 py-1 px-1">
+    <ScrollArea className="w-full rounded-md">
+      <div className={cn(
+        "flex space-x-2",
+        isMobile ? "py-1 px-1" : "py-2 px-2"
+      )}>
         {categories.map((category, index) => (
           <motion.button
             key={category}
@@ -24,8 +27,8 @@ export function CategoryChips({ categories, selectedCategory, onSelectCategory }
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             className={cn(
-              "inline-flex items-center rounded-full text-sm font-semibold transition-all duration-300",
-              isMobile ? "px-3 py-1.5" : "px-6 py-2.5",
+              "inline-flex items-center rounded-full text-sm font-semibold transition-all duration-300 whitespace-nowrap",
+              isMobile ? "px-3 py-1.5 text-xs" : "px-6 py-2.5",
               selectedCategory === category
                 ? "bg-gradient-gold text-black shadow-lg"
                 : "bg-secondary/80 text-foreground hover:bg-secondary/60"
@@ -36,7 +39,7 @@ export function CategoryChips({ categories, selectedCategory, onSelectCategory }
           </motion.button>
         ))}
       </div>
-      <ScrollBar orientation="horizontal" className="h-2" />
+      <ScrollBar orientation="horizontal" className="h-1.5" />
     </ScrollArea>
   );
 }

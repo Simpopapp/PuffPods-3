@@ -8,6 +8,7 @@ import { ProductGrid } from "@/components/sections/ProductGrid";
 import { useInView } from "react-intersection-observer";
 import { Sparkles } from "lucide-react";
 import { useIsMobile } from "@/hooks/use-mobile";
+import { cn } from "@/lib/utils";
 
 const categories = [
   "Todos",
@@ -101,30 +102,56 @@ const Categories = () => {
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="container mx-auto px-2 sm:px-4 py-4 sm:py-8 space-y-4 sm:space-y-8"
+        className={cn(
+          "mx-auto",
+          isMobile ? "px-2 py-2 space-y-3" : "container px-4 py-8 space-y-8"
+        )}
       >
         <motion.div 
-          className="flex items-center gap-2 sm:gap-4 mb-4 sm:mb-8"
+          className={cn(
+            "flex items-center gap-2 mb-2",
+            isMobile ? "px-2" : "mb-8 gap-4"
+          )}
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ delay: 0.2 }}
         >
-          <Sparkles className="w-6 h-6 sm:w-8 sm:h-8 text-gold animate-pulse" />
+          <Sparkles className={cn(
+            "text-gold animate-pulse",
+            isMobile ? "w-5 h-5" : "w-8 h-8"
+          )} />
           <div>
-            <h1 className="text-2xl sm:text-4xl font-bold bg-gradient-gold text-transparent bg-clip-text">
+            <h1 className={cn(
+              "font-bold bg-gradient-gold text-transparent bg-clip-text",
+              isMobile ? "text-xl" : "text-4xl"
+            )}>
               Categorias
             </h1>
-            <p className="text-sm sm:text-base text-gray-400 mt-1">
+            <p className={cn(
+              "text-gray-400 mt-1",
+              isMobile ? "text-xs" : "text-base"
+            )}>
               Explore nossa seleção premium de produtos
             </p>
           </div>
         </motion.div>
         
-        <div className="sticky top-0 z-50 bg-background/80 backdrop-blur-lg py-2 sm:py-4 space-y-3 sm:space-y-4 shadow-lg rounded-lg px-2 sm:px-4">
-          <SearchBar onSearch={handleSearch} />
+        <div className={cn(
+          "sticky top-0 z-50 bg-background/80 backdrop-blur-lg rounded-lg",
+          isMobile ? "p-2 space-y-2" : "p-4 space-y-4"
+        )}>
+          <div className={cn(
+            "w-full",
+            isMobile ? "px-0" : "px-2"
+          )}>
+            <SearchBar onSearch={handleSearch} />
+          </div>
           
-          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 sm:gap-4">
-            <div className="w-full sm:w-auto">
+          <div className={cn(
+            "flex flex-col gap-2",
+            isMobile ? "items-stretch" : "sm:flex-row sm:items-center sm:justify-between sm:gap-4"
+          )}>
+            <div className="w-full sm:w-auto overflow-hidden">
               <CategoryChips
                 categories={categories}
                 selectedCategory={selectedCategory}
@@ -132,7 +159,7 @@ const Categories = () => {
               />
             </div>
             
-            <div className="flex items-center gap-2 w-full sm:w-auto justify-end">
+            <div className="flex items-center gap-2 w-full justify-end sm:w-auto">
               <ViewToggle view={view} onViewChange={setView} />
               <FilterSheet onFilterChange={handleFilterChange} />
             </div>
@@ -144,7 +171,10 @@ const Categories = () => {
           initial={{ opacity: 0 }}
           animate={inView ? { opacity: 1 } : { opacity: 0 }}
           transition={{ duration: 0.5 }}
-          className="pb-20"
+          className={cn(
+            "pb-20",
+            isMobile ? "px-0" : "px-2"
+          )}
         >
           <ProductGrid 
             products={filteredProducts}
