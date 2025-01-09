@@ -37,7 +37,7 @@ const v80Products = [
 ];
 
 export const V80Line = () => (
-  <ProductSection title="V80" className="mb-20">
+  <ProductSection title="Linha V80" className="mb-20">
     {v80Products.map((product) => (
       <ProductCard key={product.id} {...product} />
     ))}
