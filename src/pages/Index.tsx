@@ -5,6 +5,7 @@ import { FeaturedCarousel } from "@/components/home/FeaturedCarousel";
 import { BestSellers } from "@/components/home/BestSellers";
 import { Recommendations } from "@/components/home/Recommendations";
 import { PremiumSection } from "@/components/premium/PremiumSection";
+import { FilterBottomSheet } from "@/components/filters/FilterBottomSheet";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
@@ -22,6 +23,11 @@ const Index = () => {
       controls.start("visible");
     }
   }, [controls, inView]);
+
+  const handleFilterChange = (filters: any) => {
+    console.log("Filters changed:", filters);
+    // Implement filter logic here
+  };
 
   return (
     <div className="min-h-screen bg-background">
@@ -54,14 +60,17 @@ const Index = () => {
             </motion.p>
           </div>
           
-          <Button
-            variant="ghost"
-            size="icon"
-            className="text-gold hover:text-gold/80"
-            onClick={() => navigate("/profile")}
-          >
-            <User className="h-5 w-5" />
-          </Button>
+          <div className="flex items-center gap-2">
+            <FilterBottomSheet onFilterChange={handleFilterChange} />
+            <Button
+              variant="ghost"
+              size="icon"
+              className="text-gold hover:text-gold/80"
+              onClick={() => navigate("/profile")}
+            >
+              <User className="h-5 w-5" />
+            </Button>
+          </div>
         </div>
       </motion.header>
 
