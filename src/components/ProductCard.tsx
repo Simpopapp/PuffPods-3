@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { useCart } from "@/contexts/CartContext";
+import { toast } from "sonner";
 
 interface ProductCardProps {
   id: string;
@@ -10,13 +11,19 @@ interface ProductCardProps {
   image: string;
   time?: string;
   onClick?: () => void;
+  isCartOpen?: boolean;
 }
 
-export function ProductCard({ id, name, description, price, image, time, onClick }: ProductCardProps) {
+export function ProductCard({ id, name, description, price, image, time, onClick, isCartOpen = false }: ProductCardProps) {
   const { addItem } = useCart();
 
   const handleBuy = () => {
     addItem({ id, name, price, image });
+    if (!isCartOpen) {
+      toast.success("Produto adicionado ao carrinho! 🛍️", {
+        description: "Clique no carrinho para ver seus itens"
+      });
+    }
     if (onClick) {
       onClick();
     }
