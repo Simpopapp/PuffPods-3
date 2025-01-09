@@ -10,7 +10,6 @@ import { CartItem } from "./cart/CartItem";
 import { CartFooter } from "./cart/CartFooter";
 import { Gift } from "lucide-react";
 import { useState } from "react";
-import { toast } from "sonner";
 
 export function Cart() {
   const { items, removeItem, updateQuantity, total, itemCount } = useCart();
@@ -44,12 +43,18 @@ export function Cart() {
         <AnimatePresence>
           {!isOpen && itemCount > 0 && (
             <motion.div
-              initial={{ opacity: 0, x: 50 }}
+              initial={{ opacity: 0, x: -100 }}
               animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: 50 }}
-              className="absolute left-[-100px] top-1/2 transform -translate-y-1/2"
+              exit={{ opacity: 0, x: 50, transition: { duration: 0.2 } }}
+              transition={{ 
+                type: "spring",
+                stiffness: 100,
+                damping: 15,
+                duration: 0.6
+              }}
+              className="absolute right-[120%] top-1/2 transform -translate-y-1/2"
             >
-              <ArrowRight className="h-8 w-8 text-gold animate-pulse" />
+              <ArrowRight className="h-6 w-6 text-gold" />
             </motion.div>
           )}
         </AnimatePresence>
