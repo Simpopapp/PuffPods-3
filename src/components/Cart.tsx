@@ -1,7 +1,7 @@
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { ShoppingCart, ArrowRight } from "lucide-react";
+import { ShoppingCart, ChevronRight } from "lucide-react";
 import { useCart } from "@/contexts/CartContext";
 import { motion, AnimatePresence } from "framer-motion";
 import { CartHeader } from "./cart/CartHeader";
@@ -55,36 +55,39 @@ export function Cart() {
         <AnimatePresence>
           {showArrow && !isOpen && (
             <motion.div
-              initial={{ opacity: 0, x: 50, scale: 0.5 }}
+              initial={{ opacity: 0, x: 30 }}
               animate={{ 
                 opacity: 1, 
-                x: 0, 
-                scale: 1,
+                x: -20,
                 transition: {
                   type: "spring",
-                  stiffness: 200,
-                  damping: 15
+                  stiffness: 100,
+                  damping: 20,
+                  duration: 0.8
                 }
               }}
               exit={{ 
-                opacity: 0, 
-                x: -20, 
-                scale: 0.5,
-                transition: { duration: 0.2 }
+                opacity: 0,
+                x: -30,
+                transition: {
+                  duration: 0.3,
+                  ease: "easeOut"
+                }
               }}
-              className="absolute left-[-100px] top-1/2 transform -translate-y-1/2"
+              className="absolute left-[-60px] top-1/2 transform -translate-y-1/2"
             >
               <motion.div
                 animate={{
-                  x: [0, 10, 0],
+                  x: [0, 8, 0],
                 }}
                 transition={{
-                  duration: 1,
+                  duration: 1.2,
                   repeat: Infinity,
                   ease: "easeInOut"
                 }}
+                className="bg-gradient-to-r from-gold to-gold-light p-2 rounded-full shadow-lg"
               >
-                <ArrowRight className="h-8 w-8 text-gold drop-shadow-lg" />
+                <ChevronRight className="h-6 w-6 text-black" />
               </motion.div>
             </motion.div>
           )}
