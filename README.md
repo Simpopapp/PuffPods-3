@@ -1,91 +1,103 @@
 # PodsPuffs - Vape Store
 
-## Plano de Implementação UX-First
+## Plano de Reconstrução Mobile-First
 
-### Etapa 1: Reformulação da Home
-- Implementar hero section com vídeo/animação de fundo
-- Criar carrossel de produtos em destaque com efeito parallax
-- Adicionar seção "Trending Now" com contadores de vendas em tempo real
-- Implementar preview rápido de produtos com gestos
-- Criar navegação por categorias com ícones animados
-- Adicionar barra de busca com sugestões inteligentes
-- Implementar sistema de notificações de ofertas
+### 1. Base Structure & Typography
+- Simplificar a estrutura base do layout
+- Definir hierarquia tipográfica clara
+- Estabelecer espaçamentos consistentes
+- Implementar grid system responsivo
+- Otimizar para diferentes tamanhos de tela
 
-### Etapa 2: Sistema de Navegação
-- Desenvolver bottom navigation com feedback tátil
-- Criar micro-interações para cada ação do usuário
-- Implementar transições suaves entre páginas
-- Adicionar gestos de navegação intuitivos
-- Criar breadcrumbs interativos
-- Implementar menu lateral com filtros rápidos
-- Adicionar indicadores de progresso
+### 2. Product Cards
+- Redesenhar cards com foco mobile-first
+- Manter informações essenciais (nome, preço, puffs)
+- Otimizar imagens e interações
+- Implementar lazy loading
+- Adicionar gestos touch-friendly
 
-### Etapa 3: Experiência de Categorias
-- Criar grid dinâmico com cards responsivos
-- Implementar filtros com preview em tempo real
-- Adicionar ordenação com animações de reorganização
-- Criar visualização em lista/grid com transições
-- Implementar lazy loading com skeleton screens
-- Adicionar pull-to-refresh com animações
-- Criar sistema de tags interativas
+### 3. Premium Sections
+- Simplificar seções premium
+- Focar em CTA (Call-to-Action) direto
+- Layout mais limpo e direto
+- Destacar benefícios principais
+- Melhorar conversão
 
-### Etapa 4: Sistema de Busca Avançado
-- Desenvolver busca com autocompleção
-- Criar histórico de buscas personalizadas
-- Implementar filtros dinâmicos com chips
-- Adicionar sugestões baseadas em tendências
-- Criar preview de resultados instantâneo
-- Implementar correção automática de termos
-- Adicionar busca por voz/imagem
+### 4. Filters & Sorting
+- Simplificar interface de filtros
+- Bottom sheet otimizado para mobile
+- Controles touch-friendly
+- Busca inteligente
+- Filtros mais relevantes
 
-### Etapa 5: Cards e Previews
-- Redesenhar cards com informações essenciais
-- Criar preview expandido com gestos
-- Implementar badges dinâmicos de status
-- Adicionar indicadores de popularidade
-- Criar sistema de ratings visual
-- Implementar compartilhamento rápido
-- Adicionar animações de interação
+### 5. Brands Menu
+- Redesenhar navegação de marcas
+- Carrossel otimizado para touch
+- Layout mais compacto
+- Transições suaves
+- Preview rápido
 
-### Etapa 6: Micro-interações
-- Criar feedback visual para cada ação
-- Implementar loading states personalizados
-- Adicionar tooltips contextuais
-- Criar animações de transição suaves
-- Implementar efeitos de hover
-- Adicionar feedback sonoro (opcional)
-- Criar indicadores de progresso
+### 6. Cart Experience
+- Simplificar processo de compra
+- Feedback visual mais claro
+- Melhor UX em mobile
+- Resumo de pedido otimizado
+- Checkout em poucos passos
 
-### Etapa 7: Performance e Feedback
-- Implementar skeleton screens
-- Criar sistema de cache inteligente
-- Adicionar indicadores de carregamento
-- Implementar retry automático
-- Criar mensagens de erro amigáveis
-- Adicionar feedback de sucesso
-- Implementar sistema de logs
+### 7. Final Polish
+- Animações sutis e performáticas
+- Testes de usabilidade
+- Otimização de performance
+- Ajustes finais de UI/UX
+- Validação cross-device
 
-### Etapa 8: Personalização
-- Criar temas dinâmicos
-- Implementar modo escuro/claro
-- Adicionar preferências de visualização
-- Criar layouts personalizáveis
-- Implementar atalhos customizáveis
-- Adicionar favoritos rápidos
-- Criar dashboard personalizado
+## Catálogo de Produtos
+
+### Linha Ignite
+
+#### V15 Series
+- Ignite V15 Vape Device
+- Ignite V15 Vape Device [10 Pack]
+
+#### V35 Series
+- Ignite V35 Vape Device
+- Ignite V35 Vape Device [10 Pack]
+
+#### V50 Series
+- Ignite V50 Vape Device
+- Ignite V50 Vape Device [10 Pack]
+
+#### V60 Series
+- Ignite V60 Vape Device
+- Ignite V60 Vape Device [10 Pack]
+
+#### V80 Series
+- Ignite V80 Vape Device
+- Ignite V80 Vape Device - Tobacco
+- Ignite V80 Vape Device [10 Pack]
+- Ignite V80 Vape Device - Tobacco [10 Pack]
+
+#### V150 Series
+- Ignite V150 Vape Device
+- Ignite V150 Vape Device - Tobacco
+- Ignite V150 Vape Device [5 Pack]
+- Ignite V150 Vape Device - Tobacco [5 Pack]
+
+### Marcas Futuras
+- Lost Mary (Em breve)
+- Oxbar (Em breve)
 
 ## Como Implementar
 
-Para iniciar cada etapa do processo de implementação, envie o comando correspondente:
+Para iniciar cada etapa do processo de reconstrução, envie o comando correspondente:
 
-- "etapa 1 agora" - Inicia implementação da Reformulação da Home
-- "etapa 2 agora" - Inicia implementação do Sistema de Navegação
-- "etapa 3 agora" - Inicia implementação da Experiência de Categorias
-- "etapa 4 agora" - Inicia implementação do Sistema de Busca Avançado
-- "etapa 5 agora" - Inicia implementação dos Cards e Previews
-- "etapa 6 agora" - Inicia implementação das Micro-interações
-- "etapa 7 agora" - Inicia implementação da Performance e Feedback
-- "etapa 8 agora" - Inicia implementação da Personalização
+- "etapa 1 agora" - Inicia implementação da Base Structure & Typography
+- "etapa 2 agora" - Inicia implementação dos Product Cards
+- "etapa 3 agora" - Inicia implementação das Premium Sections
+- "etapa 4 agora" - Inicia implementação dos Filters & Sorting
+- "etapa 5 agora" - Inicia implementação do Brands Menu
+- "etapa 6 agora" - Inicia implementação da Cart Experience
+- "etapa 7 agora" - Inicia implementação do Final Polish
 
 ## Project info
 
@@ -139,7 +151,7 @@ npm run dev
 
 ## What technologies are used for this project?
 
-This project is built with .
+This project is built with:
 
 - Vite
 - TypeScript
