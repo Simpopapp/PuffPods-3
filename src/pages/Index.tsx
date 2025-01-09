@@ -4,8 +4,7 @@ import { useInView } from "react-intersection-observer";
 import { FeaturedCarousel } from "@/components/home/FeaturedCarousel";
 import { BestSellers } from "@/components/home/BestSellers";
 import { Recommendations } from "@/components/home/Recommendations";
-import { PremiumSection } from "@/components/PremiumSection";
-import { PremiumSection2 } from "@/components/PremiumSection2";
+import { PremiumSection } from "@/components/premium/PremiumSection";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
@@ -92,12 +91,6 @@ const Index = () => {
           <section className="section-spacing">
             <div className="container-fluid">
               <BestSellers />
-            </div>
-          </section>
-
-          <section className="section-spacing bg-secondary/5">
-            <div className="container-fluid">
-              <PremiumSection2 />
             </div>
           </section>
 
