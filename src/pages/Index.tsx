@@ -61,7 +61,7 @@ const Index = () => {
         <header className="w-full py-4 px-4">
           <div className="container mx-auto">
             <h1 className="text-4xl font-bold">
-              Ignite Vape Store
+              PodsPuffs - Vape Store
             </h1>
             <p className="text-lg text-gray-400 mt-1">
               A melhor seleção de pods descartáveis Ignite
