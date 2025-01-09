@@ -99,69 +99,44 @@ const Categories = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        className={cn(
-          "mx-auto",
-          isMobile ? "px-2 py-2 space-y-3" : "container px-4 py-8 space-y-8"
-        )}
-      >
+      <div className={cn(
+        "mx-auto max-w-[500px]", // Limitando a largura máxima para mobile
+        isMobile ? "px-0" : "container px-4 py-8"
+      )}>
         <motion.div 
-          className={cn(
-            "flex items-center gap-2 mb-2",
-            isMobile ? "px-2" : "mb-8 gap-4"
-          )}
+          className="flex items-center gap-2 px-4 py-3"
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ delay: 0.2 }}
         >
-          <Sparkles className={cn(
-            "text-gold animate-pulse",
-            isMobile ? "w-5 h-5" : "w-8 h-8"
-          )} />
+          <Sparkles className="text-gold animate-pulse w-5 h-5" />
           <div>
-            <h1 className={cn(
-              "font-bold bg-gradient-gold text-transparent bg-clip-text",
-              isMobile ? "text-xl" : "text-4xl"
-            )}>
+            <h1 className="text-xl font-bold bg-gradient-gold text-transparent bg-clip-text">
               Categorias
             </h1>
-            <p className={cn(
-              "text-gray-400 mt-1",
-              isMobile ? "text-xs" : "text-base"
-            )}>
+            <p className="text-xs text-gray-400">
               Explore nossa seleção premium de produtos
             </p>
           </div>
         </motion.div>
         
-        <div className={cn(
-          "sticky top-0 z-50 bg-background/80 backdrop-blur-lg rounded-lg",
-          isMobile ? "p-2 space-y-2" : "p-4 space-y-4"
-        )}>
-          <div className={cn(
-            "w-full",
-            isMobile ? "px-0" : "px-2"
-          )}>
+        <div className="sticky top-0 z-50 bg-background/80 backdrop-blur-lg">
+          <div className="px-4 py-3 space-y-3">
             <SearchBar onSearch={handleSearch} />
-          </div>
-          
-          <div className={cn(
-            "flex flex-col gap-2",
-            isMobile ? "items-stretch" : "sm:flex-row sm:items-center sm:justify-between sm:gap-4"
-          )}>
-            <div className="w-full sm:w-auto overflow-hidden">
-              <CategoryChips
-                categories={categories}
-                selectedCategory={selectedCategory}
-                onSelectCategory={setSelectedCategory}
-              />
-            </div>
             
-            <div className="flex items-center gap-2 w-full justify-end sm:w-auto">
-              <ViewToggle view={view} onViewChange={setView} />
-              <FilterSheet onFilterChange={handleFilterChange} />
+            <div className="flex flex-col gap-3">
+              <div className="w-full overflow-hidden">
+                <CategoryChips
+                  categories={categories}
+                  selectedCategory={selectedCategory}
+                  onSelectCategory={setSelectedCategory}
+                />
+              </div>
+              
+              <div className="flex items-center justify-between w-full">
+                <ViewToggle view={view} onViewChange={setView} />
+                <FilterSheet onFilterChange={handleFilterChange} />
+              </div>
             </div>
           </div>
         </div>
@@ -171,10 +146,7 @@ const Categories = () => {
           initial={{ opacity: 0 }}
           animate={inView ? { opacity: 1 } : { opacity: 0 }}
           transition={{ duration: 0.5 }}
-          className={cn(
-            "pb-20",
-            isMobile ? "px-0" : "px-2"
-          )}
+          className="px-4 pb-20"
         >
           <ProductGrid 
             products={filteredProducts}
@@ -182,7 +154,7 @@ const Categories = () => {
             view={view}
           />
         </motion.div>
-      </motion.div>
+      </div>
     </div>
   );
 };
