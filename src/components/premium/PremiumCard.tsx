@@ -1,26 +1,46 @@
 import { Button } from "@/components/ui/button";
-import { Star } from "lucide-react";
+import { motion } from "framer-motion";
+import { LucideIcon } from "lucide-react";
+import { cn } from "@/lib/utils";
 import { useIsMobile } from "@/hooks/use-mobile";
 
-interface PremiumSection2Props {
+interface PremiumCardProps {
+  title: string;
+  description: string;
+  features: string[];
+  icon: LucideIcon;
+  image: string;
+  buttonText: string;
   onButtonClick?: () => void;
 }
 
-export function PremiumSection2({ onButtonClick }: PremiumSection2Props) {
+export function PremiumCard({
+  title,
+  description,
+  features,
+  icon: Icon,
+  image,
+  buttonText,
+  onButtonClick
+}: PremiumCardProps) {
   const isMobile = useIsMobile();
   
   return (
-    <div className="relative overflow-hidden bg-secondary rounded-lg p-4 sm:p-8 mb-8 sm:mb-16">
+    <motion.div 
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      className="relative overflow-hidden bg-secondary rounded-lg p-4 sm:p-8"
+    >
       <div className="flex flex-col md:flex-row items-center gap-4 sm:gap-8">
         <div className="flex-1 space-y-3 sm:space-y-4">
           <h2 className="text-xl sm:text-3xl font-bold text-gold flex items-center gap-2">
-            <Star className="h-6 w-6 sm:h-8 sm:w-8" /> Ignite V80
+            <Icon className="h-6 w-6 sm:h-8 sm:w-8" /> {title}
           </h2>
           <p className="text-sm sm:text-base text-gray-400">
-            Descubra nossa linha premium V80, com design elegante e duração excepcional de até 800 puffs.
+            {description}
           </p>
           <div className="space-y-2 sm:space-y-4">
-            {["800 puffs de duração", "Design compacto", "Sabores intensos"].map((feature, index) => (
+            {features.map((feature, index) => (
               <div key={index} className="flex items-center gap-2">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -42,21 +62,26 @@ export function PremiumSection2({ onButtonClick }: PremiumSection2Props) {
             ))}
           </div>
           <Button 
-            className="w-full sm:w-auto mt-4 bg-gradient-gold text-black hover:bg-gold hover:scale-105 transition-all duration-300"
+            className={cn(
+              "w-full sm:w-auto mt-4",
+              "bg-gradient-gold text-black hover:bg-gold hover:scale-105 transition-all duration-300"
+            )}
             onClick={onButtonClick}
             size={isMobile ? "sm" : "default"}
           >
-            Comprar V80
+            {buttonText}
           </Button>
         </div>
         <div className="flex-1 w-full">
-          <img
-            src="https://cdn.shopify.com/s/files/1/0072/5119/8050/files/V80_Couch.jpg?v=1713918859"
-            alt="Ignite V80"
+          <motion.img
+            src={image}
+            alt={title}
             className="rounded-lg w-full h-[200px] sm:h-[300px] object-cover"
+            whileHover={{ scale: 1.05 }}
+            transition={{ duration: 0.3 }}
           />
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 }
