@@ -9,11 +9,23 @@ import { CartProgress } from "./cart/CartProgress";
 import { CartItem } from "./cart/CartItem";
 import { CartFooter } from "./cart/CartFooter";
 import { Gift } from "lucide-react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 export function Cart() {
   const { items, removeItem, updateQuantity, total, itemCount } = useCart();
   const [isOpen, setIsOpen] = useState(false);
+  const [showArrow, setShowArrow] = useState(false);
+
+  useEffect(() => {
+    if (itemCount > 0) {
+      setShowArrow(true);
+      const timer = setTimeout(() => {
+        setShowArrow(false);
+      }, 2000); // A seta ficará visível por 2 segundos
+
+      return () => clearTimeout(timer);
+    }
+  }, [itemCount]); // Executa quando itemCount muda
 
   return (
     <Sheet open={isOpen} onOpenChange={setIsOpen}>
@@ -41,11 +53,11 @@ export function Cart() {
         </SheetTrigger>
 
         <AnimatePresence>
-          {!isOpen && itemCount > 0 && (
+          {!isOpen && showArrow && (
             <motion.div
               initial={{ opacity: 0, x: -100 }}
               animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: 50, transition: { duration: 0.2 } }}
+              exit={{ opacity: 0, x: 50 }}
               transition={{ 
                 type: "spring",
                 stiffness: 100,
