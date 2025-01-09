@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Plus, Minus, Trash2, Sparkles } from "lucide-react";
 import { motion } from "framer-motion";
 import { toast } from "sonner";
+import { useCart } from "@/contexts/CartContext";
 
 interface CartItemProps {
   id: string;
@@ -22,6 +23,9 @@ export const CartItem = ({
   onQuantityChange,
   onRemove,
 }: CartItemProps) => {
+  const { total } = useCart();
+  const secondThreshold = 300;
+  
   const handleQuantityChange = (newQuantity: number) => {
     if (newQuantity > 0) {
       const difference = newQuantity - quantity;
@@ -57,7 +61,7 @@ export const CartItem = ({
         </h3>
         <p className="text-sm text-muted-foreground">
           R$ {price.toFixed(2)}
-          {quantity >= 2 && (
+          {total >= secondThreshold && (
             <span className="ml-2 text-gold text-xs">
               Economia ativa!
             </span>
