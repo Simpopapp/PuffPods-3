@@ -28,40 +28,42 @@ const Index = () => {
     <div className="min-h-screen bg-background">
       <motion.header 
         className={cn(
-          "w-full bg-background/80 backdrop-blur-lg z-40 flex justify-between items-center",
-          isMobile ? "py-4 px-4 sticky top-0" : "container mx-auto py-8"
+          "w-full bg-background/80 backdrop-blur-lg z-40 mobile-safe-top",
+          isMobile ? "sticky top-0 py-4 px-4" : "container-fluid py-8"
         )}
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.3 }}
       >
-        <div>
-          <motion.h1 
-            className={cn(
-              "font-bold bg-gradient-gold text-transparent bg-clip-text",
-              isMobile ? "text-2xl" : "text-4xl"
-            )}
+        <div className="flex justify-between items-center">
+          <div>
+            <motion.h1 
+              className="text-gradient font-bold"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.2 }}
+            >
+              PodsPuffs
+            </motion.h1>
+            <motion.p 
+              className="text-muted-foreground"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.3 }}
+            >
+              Descubra nossa seleção premium de pods
+            </motion.p>
+          </div>
+          
+          <Button
+            variant="ghost"
+            size="icon"
+            className="text-gold hover:text-gold/80"
+            onClick={() => navigate("/profile")}
           >
-            PodsPuffs
-          </motion.h1>
-          <motion.p 
-            className={cn(
-              "text-gray-400",
-              isMobile ? "text-sm mt-1" : "text-lg mt-2"
-            )}
-          >
-            Descubra nossa seleção premium de pods
-          </motion.p>
+            <User className="h-5 w-5" />
+          </Button>
         </div>
-        
-        <Button
-          variant="ghost"
-          size="icon"
-          className="text-gold hover:text-gold/80"
-          onClick={() => navigate("/profile")}
-        >
-          <User className="h-5 w-5" />
-        </Button>
       </motion.header>
 
       <main className="flex-1">
@@ -73,23 +75,37 @@ const Index = () => {
             visible: { opacity: 1 },
             hidden: { opacity: 0 }
           }}
-          className="space-y-8 md:space-y-16 pb-16"
+          className="space-y-8 md:space-y-16 pb-16 mobile-safe-bottom"
         >
-          <section className="pt-4">
-            <FeaturedCarousel />
+          <section className="section-spacing">
+            <div className="container-fluid">
+              <FeaturedCarousel />
+            </div>
           </section>
 
-          <section className="container mx-auto px-4">
-            <PremiumSection />
+          <section className="section-spacing bg-secondary/5">
+            <div className="container-fluid">
+              <PremiumSection />
+            </div>
           </section>
 
-          <BestSellers />
-
-          <section className="container mx-auto px-4">
-            <PremiumSection2 />
+          <section className="section-spacing">
+            <div className="container-fluid">
+              <BestSellers />
+            </div>
           </section>
 
-          <Recommendations />
+          <section className="section-spacing bg-secondary/5">
+            <div className="container-fluid">
+              <PremiumSection2 />
+            </div>
+          </section>
+
+          <section className="section-spacing">
+            <div className="container-fluid">
+              <Recommendations />
+            </div>
+          </section>
         </motion.div>
       </main>
     </div>
