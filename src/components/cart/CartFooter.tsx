@@ -45,7 +45,7 @@ export const CartFooter = ({ total }: CartFooterProps) => {
       return;
     }
 
-    const phoneNumber = "5511999999999"; // Substitua pelo seu número
+    const phoneNumber = "5519994108544"; // Substitua pelo seu número
     const whatsappUrl = `https://wa.me/${phoneNumber}?text=${formatOrderDetails()}`;
     
     console.log("Iniciando checkout via WhatsApp...");
