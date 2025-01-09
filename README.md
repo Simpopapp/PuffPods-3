@@ -103,6 +103,106 @@ Para iniciar cada etapa do processo de reconstrução, envie o comando correspon
 
 **URL**: https://lovable.dev/projects/d4247768-3bde-4df5-8414-9a41d203b071
 
+## Paleta de Cores
+
+Escolha uma combinação de cores da paleta abaixo e inclua-as na configuração de design do projeto.
+
+**Exemplo de Paleta de Cores:**
+- **Dourado Principal:** #FFB800
+- **Dourado Secundário:** #FFD700
+- **Fundo Escuro:** #0D0D0F
+- **Fundo Secundário:** #1A1A1D
+- **Texto Principal:** #FFFFFF
+- **Texto Secundário:** #A0A0A0
+
+**Cores de Status:**
+- **Sucesso:** #22C55E
+- **Erro:** #EF4444
+- **Aviso:** #F59E0B
+
+### Sistema de Design
+
+1. **Tipografia**
+   ```typescript
+   typography: {
+     fonts: {
+       body: "Inter, sans-serif",
+       heading: "Inter, sans-serif"
+     },
+     sizes: {
+       xs: "0.75rem",    // 12px
+       sm: "0.875rem",   // 14px
+       base: "1rem",     // 16px
+       lg: "1.125rem",   // 18px
+       xl: "1.25rem",    // 20px
+       "2xl": "1.5rem",  // 24px
+       "3xl": "1.875rem" // 30px
+     }
+   }
+   ```
+
+2. **Espaçamento**
+   ```typescript
+   spacing: {
+     xs: "0.25rem",  // 4px
+     sm: "0.5rem",   // 8px
+     md: "1rem",     // 16px
+     lg: "1.5rem",   // 24px
+     xl: "2rem",     // 32px
+     "2xl": "2.5rem" // 40px
+   }
+   ```
+
+3. **Bordas**
+   ```typescript
+   borders: {
+     radius: {
+       sm: "0.25rem",  // 4px
+       md: "0.5rem",   // 8px
+       lg: "0.75rem",  // 12px
+       full: "9999px"  // Circular
+     }
+   }
+   ```
+
+4. **Breakpoints**
+   ```typescript
+   breakpoints: {
+     sm: "640px",
+     md: "768px",
+     lg: "1024px",
+     xl: "1280px"
+   }
+   ```
+
+### Como Implementar
+
+1. **Copie os Tokens**
+   - Copie o arquivo `src/theme/tokens.ts` para seu novo projeto
+   - Mantenha a estrutura de tipos e helpers
+
+2. **Configure o Tailwind**
+   - Atualize `tailwind.config.ts` com as cores e tokens
+   - Mantenha a extensão de temas consistente
+
+3. **Use nos Componentes**
+   ```tsx
+   import { getThemeToken } from '@/theme/tokens';
+   
+   // Exemplo de uso
+   const primaryColor = getThemeToken('colors', 'brand', 'primary');
+   const spacing = getThemeToken('spacing', '', 'md');
+   
+   <div className="bg-primary text-white p-md">
+     Conteúdo
+   </div>
+   ```
+
+4. **Mantenha a Consistência**
+   - Use sempre os tokens definidos
+   - Evite valores hardcoded
+   - Mantenha a documentação atualizada
+
 ## How can I edit this code?
 
 There are several ways of editing your application.
