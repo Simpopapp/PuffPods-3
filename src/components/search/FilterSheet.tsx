@@ -6,6 +6,8 @@ import { SlidersHorizontal, X } from "lucide-react";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { motion, AnimatePresence } from "framer-motion";
 import { Badge } from "@/components/ui/badge";
+import { useIsMobile } from "@/hooks/use-mobile";
+import { cn } from "@/lib/utils";
 
 export interface FilterOptions {
   priceRange: [number, number];
@@ -36,6 +38,7 @@ export function FilterSheet({ onFilterChange }: FilterSheetProps) {
     categories: [],
     puffCount: [0, 8000]
   });
+  const isMobile = useIsMobile();
 
   const handleCategoryToggle = (category: string) => {
     const updated = filters.categories.includes(category)
@@ -85,8 +88,13 @@ export function FilterSheet({ onFilterChange }: FilterSheetProps) {
   return (
     <Sheet open={open} onOpenChange={setOpen}>
       <SheetTrigger asChild>
-        <Button variant="outline" size="icon" className="relative">
+        <Button 
+          variant="outline" 
+          size={isMobile ? "sm" : "icon"}
+          className="relative flex items-center gap-2"
+        >
           <SlidersHorizontal className="h-4 w-4" />
+          {isMobile && <span>Filtros</span>}
           {activeFiltersCount > 0 && (
             <Badge 
               className="absolute -top-2 -right-2 h-5 w-5 p-0 flex items-center justify-center bg-gold text-black"
@@ -97,29 +105,37 @@ export function FilterSheet({ onFilterChange }: FilterSheetProps) {
           )}
         </Button>
       </SheetTrigger>
-      <SheetContent side="bottom" className="h-[80vh]">
-        <SheetHeader className="flex flex-row items-center justify-between">
-          <SheetTitle>Filtros</SheetTitle>
+      <SheetContent 
+        side={isMobile ? "bottom" : "right"} 
+        className={cn(
+          "w-full sm:max-w-md",
+          isMobile ? "h-[80vh] rounded-t-xl" : "h-full"
+        )}
+      >
+        <SheetHeader className="flex flex-row items-center justify-between mb-6">
+          <SheetTitle className="text-xl font-bold">Filtros</SheetTitle>
           <div className="flex items-center gap-2">
             <Button 
               variant="ghost" 
               size="sm"
               onClick={resetFilters}
-              className="text-sm"
+              className="text-sm hover:bg-destructive/10 hover:text-destructive"
             >
-              Limpar filtros
+              Limpar
             </Button>
             <Button
               variant="ghost"
               size="icon"
               onClick={() => setOpen(false)}
+              className="h-8 w-8"
             >
               <X className="h-4 w-4" />
             </Button>
           </div>
         </SheetHeader>
-        <ScrollArea className="h-full py-4">
-          <div className="space-y-6">
+        
+        <ScrollArea className="h-[calc(100%-4rem)] pr-4">
+          <div className="space-y-8">
             <div>
               <h3 className="text-sm font-medium mb-4">Faixa de Preço</h3>
               <Slider
@@ -155,27 +171,36 @@ export function FilterSheet({ onFilterChange }: FilterSheetProps) {
             <div>
               <h3 className="text-sm font-medium mb-4">Categorias</h3>
               <AnimatePresence>
-                <div className="grid grid-cols-2 gap-2">
+                <motion.div 
+                  className="grid grid-cols-2 sm:grid-cols-3 gap-2"
+                  layout
+                >
                   {categories.map((category) => (
                     <motion.div
                       key={category}
+                      layout
+                      initial={{ opacity: 0, scale: 0.8 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      exit={{ opacity: 0, scale: 0.8 }}
                       whileHover={{ scale: 1.02 }}
                       whileTap={{ scale: 0.98 }}
                     >
                       <Button
                         variant={filters.categories.includes(category) ? "default" : "outline"}
-                        className={`w-full ${
+                        size="sm"
+                        className={cn(
+                          "w-full text-sm h-9",
                           filters.categories.includes(category) 
                             ? "bg-gradient-gold text-black" 
                             : ""
-                        }`}
+                        )}
                         onClick={() => handleCategoryToggle(category)}
                       >
                         {category}
                       </Button>
                     </motion.div>
                   ))}
-                </div>
+                </motion.div>
               </AnimatePresence>
             </div>
           </div>
