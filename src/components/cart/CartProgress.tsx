@@ -85,6 +85,7 @@ export const CartProgress = ({ total }: CartProgressProps) => {
           <motion.div
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
+            exit={{ opacity: 0, height: 0 }}
             className="text-sm text-gold flex items-center gap-2 bg-gold/10 p-2 rounded"
           >
             <Gift className="h-4 w-4" />
@@ -95,6 +96,7 @@ export const CartProgress = ({ total }: CartProgressProps) => {
           <motion.div
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
+            exit={{ opacity: 0, height: 0 }}
             className="text-sm text-gold flex items-center gap-2 bg-gold/10 p-2 rounded"
           >
             <Sparkles className="h-4 w-4" />
