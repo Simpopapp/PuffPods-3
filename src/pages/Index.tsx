@@ -80,7 +80,6 @@ const Index = () => {
         </p>
       </motion.header>
 
-      {/* Rest of the components */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
