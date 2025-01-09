@@ -7,13 +7,17 @@ interface CartProgressProps {
 
 export const CartProgress = ({ total }: CartProgressProps) => {
   const firstThreshold = 150;
-  const secondThreshold = 200;
+  const secondThreshold = 300; // Increased threshold for the second bar
   
   const getProgressToNextReward = () => {
     if (total < firstThreshold) {
       return (total / firstThreshold) * 100;
     }
-    return ((total - firstThreshold) / (secondThreshold - firstThreshold)) * 100;
+    // Start at 75% progress for the second bar
+    const baseProgress = 75;
+    const remainingProgress = 25;
+    const progressAboveThreshold = ((total - firstThreshold) / (secondThreshold - firstThreshold)) * remainingProgress;
+    return baseProgress + progressAboveThreshold;
   };
 
   const showSecondBar = total >= firstThreshold;
@@ -67,9 +71,9 @@ export const CartProgress = ({ total }: CartProgressProps) => {
             </div>
             <div className="text-sm text-muted-foreground">
               {total < secondThreshold ? (
-                `Faltam R$ ${(secondThreshold - total).toFixed(2)} para Desconto VIP de 5%`
+                `Faltam R$ ${(secondThreshold - total).toFixed(2)} para Desconto VIP de 10%`
               ) : (
-                "Desconto VIP de 5% Desbloqueado!"
+                "Desconto VIP de 10% Desbloqueado!"
               )}
             </div>
           </motion.div>
@@ -94,7 +98,7 @@ export const CartProgress = ({ total }: CartProgressProps) => {
             className="text-sm text-gold flex items-center gap-2 bg-gold/10 p-2 rounded"
           >
             <Sparkles className="h-4 w-4" />
-            <span>Desconto VIP de 5% aplicado! ✨</span>
+            <span>Desconto VIP de 10% aplicado! ✨</span>
           </motion.div>
         )}
       </AnimatePresence>
