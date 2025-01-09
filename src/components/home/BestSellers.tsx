@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { ProductCard } from "@/components/ProductCard";
-import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
+import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
 
 const bestSellers = [
   {
@@ -26,6 +26,14 @@ const bestSellers = [
     price: 69.90,
     image: "https://cdn.shopify.com/s/files/1/0072/5119/8050/files/2023_0226_Ignite_Nic_Studio_MikeKirschbaum_02.21.2023Igniteproductcreative0225.jpg?v=1691183075",
     time: "600 puffs"
+  },
+  {
+    id: "v80-tobacco",
+    name: "V80 Tobacco",
+    description: "Sabor autêntico de tabaco",
+    price: 79.90,
+    image: "https://cdn.shopify.com/s/files/1/0072/5119/8050/files/Tobacco_2.webp?v=1718828976",
+    time: "800 puffs"
   }
 ];
 
@@ -41,22 +49,23 @@ export function BestSellers() {
           Mais Vendidos
         </motion.h2>
         
-        <ScrollArea className="w-full whitespace-nowrap pb-4">
-          <div className="flex space-x-4">
+        <Carousel
+          opts={{
+            align: "start",
+            loop: true,
+          }}
+          className="w-full"
+        >
+          <CarouselContent>
             {bestSellers.map((product) => (
-              <motion.div
-                key={product.id}
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.3 }}
-                className="w-[280px] flex-none"
-              >
+              <CarouselItem key={product.id} className="md:basis-1/2 lg:basis-1/3">
                 <ProductCard {...product} />
-              </motion.div>
+              </CarouselItem>
             ))}
-          </div>
-          <ScrollBar orientation="horizontal" className="invisible" />
-        </ScrollArea>
+          </CarouselContent>
+          <CarouselPrevious className="hidden md:flex" />
+          <CarouselNext className="hidden md:flex" />
+        </Carousel>
       </div>
     </section>
   );
