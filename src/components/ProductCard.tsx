@@ -1,3 +1,4 @@
+import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
@@ -8,7 +9,6 @@ import { useInView } from "react-intersection-observer";
 import { ShoppingCart, Sparkles } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useIsMobile } from "@/hooks/use-mobile";
-import { useState } from "react";
 
 interface ProductCardProps {
   id: string;
@@ -56,7 +56,6 @@ export function ProductCard({
   const handleBuy = async (e: React.MouseEvent) => {
     e.stopPropagation();
     
-    // Animate the button
     await controls.start({
       scale: [1, 0.95, 1],
       transition: { duration: 0.2 }
@@ -75,25 +74,6 @@ export function ProductCard({
   };
 
   const handleClick = () => navigate(`/product/${id}`);
-
-  if (!inView) {
-    return (
-      <div ref={ref} className="w-full">
-        <Card className="bg-secondary border-0">
-          <CardContent className="p-0">
-            <Skeleton className="h-40 sm:h-48" />
-          </CardContent>
-          <CardContent className="p-3">
-            <Skeleton className="h-5 w-3/4 mb-2" />
-            <Skeleton className="h-4 w-full mb-2" />
-          </CardContent>
-          <CardFooter className="p-3">
-            <Skeleton className="h-9 w-full" />
-          </CardFooter>
-        </Card>
-      </div>
-    );
-  }
 
   return (
     <motion.div

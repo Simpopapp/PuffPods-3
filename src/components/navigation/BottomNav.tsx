@@ -15,13 +15,8 @@ export function BottomNav() {
   const location = useLocation();
 
   return (
-    <motion.nav 
-      className="fixed bottom-0 left-0 right-0 bg-background/80 backdrop-blur-lg border-t border-border z-50"
-      initial={{ y: 100 }}
-      animate={{ y: 0 }}
-      transition={{ duration: 0.3 }}
-    >
-      <div className="flex items-center justify-around h-16">
+    <nav className="bg-background/95 backdrop-blur-lg border-t border-border">
+      <div className="flex items-center justify-around h-16 px-2 safe-area-bottom">
         {navItems.map((item) => {
           const Icon = item.icon;
           const isActive = location.pathname === item.route;
@@ -30,23 +25,26 @@ export function BottomNav() {
             <button
               key={item.route}
               onClick={() => navigate(item.route)}
-              className="flex flex-col items-center justify-center w-full h-full"
+              className={cn(
+                "flex flex-col items-center justify-center w-full h-full",
+                "active:scale-95 transition-transform duration-200"
+              )}
             >
               <motion.div
                 initial={false}
                 animate={isActive ? { scale: 1.1 } : { scale: 1 }}
                 className={cn(
-                  "flex flex-col items-center transition-colors",
+                  "flex flex-col items-center gap-1",
                   isActive ? "text-gold" : "text-muted-foreground"
                 )}
               >
-                <Icon className="w-5 h-5 mb-1" />
-                <span className="text-xs">{item.label}</span>
+                <Icon className="w-5 h-5" />
+                <span className="text-xs font-medium">{item.label}</span>
               </motion.div>
             </button>
           );
         })}
       </div>
-    </motion.nav>
+    </nav>
   );
 }
