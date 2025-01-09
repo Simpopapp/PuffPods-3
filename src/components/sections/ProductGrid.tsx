@@ -22,13 +22,13 @@ export function ProductGrid({ products, selectedCategory, view }: ProductGridPro
   const isMobile = useIsMobile();
   
   const gridClass = view === "grid" 
-    ? `grid ${isMobile ? "grid-cols-1 gap-3" : "grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6"}`
+    ? `grid ${isMobile ? "grid-cols-2 gap-2" : "grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6"}`
     : "flex flex-col gap-4";
 
   return (
     <AnimatePresence mode="wait">
       <motion.div 
-        className={`p-2 md:p-4 ${gridClass}`}
+        className={gridClass}
         layout
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}

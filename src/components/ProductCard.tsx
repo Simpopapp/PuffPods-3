@@ -1,11 +1,11 @@
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useCart } from "@/contexts/CartContext";
 import { toast } from "sonner";
 import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
-import { ShoppingCart, Clock } from "lucide-react";
+import { ShoppingCart } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useIsMobile } from "@/hooks/use-mobile";
 
@@ -21,7 +21,17 @@ interface ProductCardProps {
   className?: string;
 }
 
-export function ProductCard({ id, name, description, price, image, time, onClick, isCartOpen = false, className }: ProductCardProps) {
+export function ProductCard({ 
+  id, 
+  name, 
+  description, 
+  price, 
+  image, 
+  time, 
+  onClick, 
+  isCartOpen = false, 
+  className 
+}: ProductCardProps) {
   const { addItem } = useCart();
   const navigate = useNavigate();
   const isMobile = useIsMobile();
@@ -34,30 +44,25 @@ export function ProductCard({ id, name, description, price, image, time, onClick
     e.stopPropagation();
     addItem({ id, name, price, image });
     if (!isCartOpen) {
-      toast.success("Produto adicionado ao carrinho! 🛍️", {
+      toast.success("Produto adicionado ao carrinho!", {
         description: "Clique no carrinho para ver seus itens"
       });
     }
-    if (onClick) {
-      onClick();
-    }
+    if (onClick) onClick();
   };
 
-  const handleClick = () => {
-    navigate(`/product/${id}`);
-  };
+  const handleClick = () => navigate(`/product/${id}`);
 
   if (!inView) {
     return (
       <div ref={ref} className="w-full">
         <Card className="bg-secondary border-0">
-          <CardHeader className="p-0">
+          <CardContent className="p-0">
             <Skeleton className="h-40 sm:h-48" />
-          </CardHeader>
+          </CardContent>
           <CardContent className="p-3">
             <Skeleton className="h-5 w-3/4 mb-2" />
             <Skeleton className="h-4 w-full mb-2" />
-            <Skeleton className="h-4 w-2/3" />
           </CardContent>
           <CardFooter className="p-3">
             <Skeleton className="h-9 w-full" />
@@ -78,24 +83,13 @@ export function ProductCard({ id, name, description, price, image, time, onClick
       onClick={handleClick}
     >
       <Card className="bg-secondary border-0 overflow-hidden group relative cursor-pointer">
-        {!isMobile && (
-          <motion.div
-            className="absolute top-3 right-3 z-10 bg-black/80 rounded-full p-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-            whileHover={{ scale: 1.1 }}
-          >
-            <ShoppingCart className="h-4 w-4 text-gold" />
-          </motion.div>
-        )}
-
-        <CardHeader className="p-0">
-          <div className="relative h-40 sm:h-48 overflow-hidden">
+        <CardContent className="p-0">
+          <div className="relative">
             <motion.img
               src={image}
               alt={name}
-              className="w-full h-full object-cover"
+              className="w-full aspect-[4/3] object-cover"
               loading="lazy"
-              whileHover={{ scale: isMobile ? 1 : 1.1 }}
-              transition={{ duration: 0.3 }}
               layoutId={`product-image-${id}`}
             />
             <motion.div 
@@ -103,29 +97,34 @@ export function ProductCard({ id, name, description, price, image, time, onClick
               initial={{ opacity: 0 }}
               whileHover={{ opacity: 1 }}
             />
+            {!isMobile && (
+              <motion.div
+                className="absolute top-3 right-3 z-10 bg-black/80 rounded-full p-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                whileHover={{ scale: 1.1 }}
+              >
+                <ShoppingCart className="h-4 w-4 text-gold" />
+              </motion.div>
+            )}
           </div>
-        </CardHeader>
+        </CardContent>
 
         <CardContent className="p-3">
           <motion.div
             initial={{ y: 10, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ delay: 0.2 }}
+            className="space-y-2"
           >
-            <CardTitle className="text-base sm:text-lg mb-1 text-gold group-hover:text-white transition-colors duration-300">
+            <h3 className="text-base font-semibold text-gold group-hover:text-white transition-colors duration-300 line-clamp-1">
               {name}
-            </CardTitle>
-            <p className="text-xs sm:text-sm text-gray-400 mb-1 group-hover:text-gray-300 transition-colors duration-300 line-clamp-2">
-              {description}
-            </p>
+            </h3>
             {time && (
-              <div className="flex items-center gap-1.5 text-sm text-gray-400 mb-1 group-hover:text-gray-300 transition-colors duration-300">
-                <Clock className="h-3.5 w-3.5 text-gold" />
-                <span className="text-xs">{time}</span>
-              </div>
+              <p className="text-xs text-gray-400 group-hover:text-gray-300 transition-colors duration-300">
+                {time}
+              </p>
             )}
             <motion.p 
-              className="text-lg sm:text-xl font-bold text-gold group-hover:scale-110 origin-left transition-transform duration-300"
+              className="text-lg font-bold text-gold group-hover:scale-110 origin-left transition-transform duration-300"
               whileHover={{ scale: 1.1 }}
             >
               R$ {price.toFixed(2)}
