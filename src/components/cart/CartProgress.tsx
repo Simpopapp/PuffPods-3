@@ -7,15 +7,15 @@ interface CartProgressProps {
 }
 
 export const CartProgress = ({ total }: CartProgressProps) => {
-  const firstThreshold = 150;
+  const firstThreshold = 200;
   const secondThreshold = 300;
   
   const getFirstBarProgress = () => Math.min((total / firstThreshold) * 100, 100);
   const getSecondBarProgress = () => {
+    if (total < firstThreshold) return 0;
     const remainingAmount = total - firstThreshold;
     const remainingThreshold = secondThreshold - firstThreshold;
-    const additionalProgress = (remainingAmount / remainingThreshold) * 25;
-    return Math.min(75 + additionalProgress, 100);
+    return Math.min((remainingAmount / remainingThreshold) * 100, 100);
   };
 
   const justUnlockedFreeShipping = total >= firstThreshold && total < firstThreshold + 0.01;
@@ -36,22 +36,40 @@ export const CartProgress = ({ total }: CartProgressProps) => {
       }}
     >
       <AnimatePresence mode="wait">
-        {total < firstThreshold ? (
-          <ProgressBar
-            progress={getFirstBarProgress()}
-            label="Progresso para Frete Grátis"
-            message={`Faltam R$ ${(firstThreshold - total).toFixed(2)} para Frete Grátis`}
-          />
-        ) : (
-          <ProgressBar
-            progress={getSecondBarProgress()}
-            label="Progresso para Desconto VIP"
-            message={
-              total < secondThreshold
-                ? `Faltam R$ ${(secondThreshold - total).toFixed(2)} para Desconto VIP de 10%`
-                : "Desconto VIP de 10% Desbloqueado!"
-            }
-          />
+        {total < firstThreshold && (
+          <motion.div
+            initial={{ opacity: 1 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            key="first-bar"
+          >
+            <ProgressBar
+              progress={getFirstBarProgress()}
+              label="Progresso para Frete Grátis"
+              message={`Faltam R$ ${(firstThreshold - total).toFixed(2)} para Frete Grátis`}
+              variant="shipping"
+            />
+          </motion.div>
+        )}
+
+        {total >= firstThreshold && (
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0 }}
+            key="second-bar"
+          >
+            <ProgressBar
+              progress={getSecondBarProgress()}
+              label="Progresso para Desconto VIP"
+              message={
+                total < secondThreshold
+                  ? `Faltam R$ ${(secondThreshold - total).toFixed(2)} para Desconto VIP de 10%`
+                  : "Desconto VIP de 10% Desbloqueado!"
+              }
+              variant="vip"
+            />
+          </motion.div>
         )}
       </AnimatePresence>
 
