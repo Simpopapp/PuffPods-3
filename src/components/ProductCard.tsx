@@ -52,15 +52,15 @@ export function ProductCard({ id, name, description, price, image, time, onClick
       <div ref={ref} className="w-full">
         <Card className="bg-secondary border-0">
           <CardHeader className="p-0">
-            <Skeleton className="h-48 sm:h-32" />
+            <Skeleton className="h-40 sm:h-48" />
           </CardHeader>
-          <CardContent className="p-4">
-            <Skeleton className="h-6 w-3/4 mb-2" />
+          <CardContent className="p-3">
+            <Skeleton className="h-5 w-3/4 mb-2" />
             <Skeleton className="h-4 w-full mb-2" />
             <Skeleton className="h-4 w-2/3" />
           </CardContent>
-          <CardFooter className="p-4">
-            <Skeleton className="h-10 w-full" />
+          <CardFooter className="p-3">
+            <Skeleton className="h-9 w-full" />
           </CardFooter>
         </Card>
       </div>
@@ -80,15 +80,15 @@ export function ProductCard({ id, name, description, price, image, time, onClick
       <Card className="bg-secondary border-0 overflow-hidden group relative cursor-pointer">
         {!isMobile && (
           <motion.div
-            className="absolute top-4 right-4 z-10 bg-black/80 rounded-full p-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+            className="absolute top-3 right-3 z-10 bg-black/80 rounded-full p-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
             whileHover={{ scale: 1.1 }}
           >
-            <ShoppingCart className="h-5 w-5 text-gold" />
+            <ShoppingCart className="h-4 w-4 text-gold" />
           </motion.div>
         )}
 
         <CardHeader className="p-0">
-          <div className="relative h-48 sm:h-32 overflow-hidden">
+          <div className="relative h-40 sm:h-48 overflow-hidden">
             <motion.img
               src={image}
               alt={name}
@@ -106,26 +106,26 @@ export function ProductCard({ id, name, description, price, image, time, onClick
           </div>
         </CardHeader>
 
-        <CardContent className="p-3 sm:p-4">
+        <CardContent className="p-3">
           <motion.div
             initial={{ y: 10, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ delay: 0.2 }}
           >
-            <CardTitle className="text-lg sm:text-xl mb-2 text-gold group-hover:text-white transition-colors duration-300">
+            <CardTitle className="text-base sm:text-lg mb-1 text-gold group-hover:text-white transition-colors duration-300">
               {name}
             </CardTitle>
-            <p className="text-xs sm:text-sm text-gray-400 mb-2 group-hover:text-gray-300 transition-colors duration-300 line-clamp-2">
+            <p className="text-xs sm:text-sm text-gray-400 mb-1 group-hover:text-gray-300 transition-colors duration-300 line-clamp-2">
               {description}
             </p>
             {time && (
-              <div className="flex items-center gap-2 text-sm text-gray-400 mb-2 group-hover:text-gray-300 transition-colors duration-300">
-                <Clock className="h-4 w-4 text-gold" />
-                <span className="text-xs sm:text-sm">{time}</span>
+              <div className="flex items-center gap-1.5 text-sm text-gray-400 mb-1 group-hover:text-gray-300 transition-colors duration-300">
+                <Clock className="h-3.5 w-3.5 text-gold" />
+                <span className="text-xs">{time}</span>
               </div>
             )}
             <motion.p 
-              className="text-xl sm:text-2xl font-bold text-gold group-hover:scale-110 origin-left transition-transform duration-300"
+              className="text-lg sm:text-xl font-bold text-gold group-hover:scale-110 origin-left transition-transform duration-300"
               whileHover={{ scale: 1.1 }}
             >
               R$ {price.toFixed(2)}
@@ -133,20 +133,20 @@ export function ProductCard({ id, name, description, price, image, time, onClick
           </motion.div>
         </CardContent>
 
-        <CardFooter className="p-3 sm:p-4">
+        <CardFooter className="p-3">
           <Button
             className="w-full bg-gradient-gold text-black hover:bg-gold group-hover:scale-105 transition-all duration-300"
             onClick={handleBuy}
-            size={isMobile ? "sm" : "default"}
+            size="sm"
           >
             <motion.span
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.3 }}
-              className="flex items-center gap-2"
+              className="flex items-center gap-1.5"
             >
-              <ShoppingCart className="h-3 w-3 sm:h-4 sm:w-4" />
-              {isMobile ? "Comprar" : "Comprar Agora"}
+              <ShoppingCart className="h-3.5 w-3.5" />
+              Comprar
             </motion.span>
           </Button>
         </CardFooter>
